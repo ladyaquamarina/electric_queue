@@ -1,0 +1,26 @@
+server:
+  port: 8089
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:6432/electron_queue
+    username: postgres
+    password: postgres
+
+  flyway:
+    password: postgres
+    user: postgres
+    url: jdbc:postgresql://localhost:6432/electron_queue
+
+  kafka:
+    bootstrap-servers: localhost:29092
+    consumer:
+      group-id: electron_queue
+      properties:
+        name: consumer
+        password: consumer
+      max-poll-records: 1
+    producer:
+      properties:
+        name: producer
+        password: producer
