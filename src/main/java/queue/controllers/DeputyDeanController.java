@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.RestController;
 import queue.mappers.DayScheduleMapper;
 import queue.mappers.DeputyDeanMapper;
 import queue.mappers.PetitionMapper;
-import queue.services.DayScheduleService;
-import queue.services.DeputyDeanService;
-import queue.services.PetitionService;
-import queue.services.QueueService;
+import queue.services.impl.DayScheduleServiceImpl;
+import queue.services.impl.DeputyDeanServiceImpl;
+import queue.services.impl.PetitionServiceImpl;
+import queue.services.impl.QueueServiceImpl;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/deputy_dean")
 public class DeputyDeanController {
-    private final DeputyDeanService deputyDeanService;
-    private final DayScheduleService dayScheduleService;
-    private final PetitionService petitionService;
-    private final QueueService queueService;
+    private final DeputyDeanServiceImpl deputyDeanService;
+    private final DayScheduleServiceImpl dayScheduleService;
+    private final PetitionServiceImpl petitionService;
+    private final QueueServiceImpl queueService;
 
     private final DeputyDeanMapper deputyDeanMapper;
     private final DayScheduleMapper dayScheduleMapper;

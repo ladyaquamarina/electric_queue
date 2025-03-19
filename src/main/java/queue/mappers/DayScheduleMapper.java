@@ -9,25 +9,26 @@ import queue.dtos.NameValueDto;
 import queue.enums.PetitionPurpose;
 import queue.models.DayScheduleEntity;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {UserMapper.class})
 public interface DayScheduleMapper {
     @InheritInverseConfiguration
-    @Mapping(source = "purpose", target = "purpose", qualifiedByName = "enumDtoToEntity")
+    @Mapping(source = "purpose", target = "purpose", qualifiedByName = "purposeDtoToEntity")
+    @Mapping(target = "deputyDean", ignore = true)
     DayScheduleEntity toEntity(DayScheduleDto dto);
 
-    @Mapping(source = "purpose", target = "purpose", qualifiedByName = "enumEntityToDto")
+    @Mapping(source = "purpose", target = "purpose", qualifiedByName = "purposeEntityToDto")
     DayScheduleDto toDto(DayScheduleEntity entity);
 
-    @Named("enumDtoToEntity")
-    static PetitionPurpose enumDtoToEntity(NameValueDto dto) {
+    @Named("purposeDtoToEntity")
+    static PetitionPurpose purposeDtoToEntity(NameValueDto dto) {
         if (dto == null) {
             return PetitionPurpose.ALL;
         }
         return PetitionPurpose.valueOf(dto.getName());
     }
 
-    @Named("enumEntityToDto")
-    static NameValueDto enumEntityToDto(PetitionPurpose entity) {
+    @Named("purposeEntityToDto")
+    static NameValueDto purposeEntityToDto(PetitionPurpose entity) {
         if (entity == null) {
             return new NameValueDto();
         }

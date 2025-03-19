@@ -3,13 +3,13 @@ package queue.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import queue.services.DayScheduleService;
-import queue.services.PetitionService;
+import queue.services.impl.DayScheduleServiceImpl;
+import queue.services.impl.PetitionServiceImpl;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/report")
 public class ReportController {
-    private final PetitionService petitionService;
-    private final DayScheduleService dayScheduleService;
+    private final PetitionServiceImpl petitionService;
+    private final DayScheduleServiceImpl dayScheduleService;
 }

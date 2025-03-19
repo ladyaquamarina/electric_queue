@@ -1,13 +1,11 @@
 package queue.services;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import queue.repositories.StudentRepository;
-import queue.repositories.UserRepository;
+import queue.dtos.StudentDto;
+import queue.models.StudentEntity;
+import reactor.core.publisher.Mono;
 
-@Service
-@RequiredArgsConstructor
-public class StudentService {
-    private final StudentRepository studentRepository;
-    private final UserRepository userRepository;
+public interface StudentService {
+    Mono<StudentEntity> createNewStudent(StudentDto dto);
+
+    Mono<StudentEntity> updateStudent(StudentDto dto);
 }
