@@ -23,6 +23,8 @@ public class UserEntity implements Persistable<UUID> {
     private String lastName;
     @Column("sur_name")
     private String surName;
+    @Column("mail")
+    private String mail;
 
     @Transient
     private boolean isNew = false;

@@ -29,8 +29,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Mono<StudentEntity> updateStudent(StudentDto dto) {
-        return checkNecessarityToUpdateUser(dto.getUser())
+    public Mono<StudentEntity> updateStudent(UUID studentId, StudentDto dto) {
+        return checkNecessityToUpdateUser(dto.getUser())
                 .flatMap(check -> userService.updateUser(dto.getUser()))
                 .then(studentRepository.findById(dto.getId()))
                 .flatMap(oldStudent -> updateStudent(dto, oldStudent)
@@ -38,7 +38,7 @@ public class StudentServiceImpl implements StudentService {
                 .flatMap(updatedStudent -> updatedStudent);
     }
 
-    private Mono<Boolean> checkNecessarityToUpdateUser(UserDto dto) {
+    private Mono<Boolean> checkNecessityToUpdateUser(UserDto dto) {
         if (dto.getFirstName() == null && dto.getLastName() == null && dto.getSurName() == null) {
             return Mono.just(false);
         }

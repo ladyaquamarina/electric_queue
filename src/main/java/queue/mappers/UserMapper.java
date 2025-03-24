@@ -21,6 +21,7 @@ public interface UserMapper {
     @Mapping(source = "firstName", target = "firstName", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
     @Mapping(source = "lastName", target = "lastName", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
     @Mapping(source = "surName", target = "surName", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+    @Mapping(source = "mail", target = "mail", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
     @Mapping(target = "new", ignore = true)
     UserEntity update(@MappingTarget UserEntity entity, UserDto dto);
 }
