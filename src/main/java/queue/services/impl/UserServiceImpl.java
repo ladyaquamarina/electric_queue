@@ -6,6 +6,7 @@ import queue.dtos.UserDto;
 import queue.mappers.UserMapper;
 import queue.models.UserEntity;
 import queue.repositories.UserRepository;
+import queue.services.AuthenticationService;
 import queue.services.UserService;
 import reactor.core.publisher.Mono;
 
@@ -16,11 +17,16 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final AuthenticationService authenticationService;
 
     @Override
-    public Mono<UserEntity> createNewUser(UserDto dto) {
-        UserEntity entity = createNewEntity(dto);
-        return userRepository.save(entity);
+    public Mono<UserEntity> createNewUser(Long chatId, UserDto dto) {
+        String mail = dto.getMail();
+        UserEntity entity = createNewEntity(chatId, dto);
+        return userRepository.findByMail(mail)
+                .flatMap(user -> authenticationService.updateChatId(user.getAuthenticationInfoId(), chatId)
+                        .map(auth -> user))
+                .switchIfEmpty(userRepository.save(entity));
     }
 
     @Override
@@ -29,7 +35,13 @@ public class UserServiceImpl implements UserService {
                 .flatMap(oldUser -> userRepository.save(userMapper.update(oldUser, newUser)));
     }
 
-    private UserEntity createNewEntity(UserDto dto) {
+    @Override
+    public Mono<UserEntity> getByChatId(Long chatId) {
+        return authenticationService.getByChatId(chatId)
+                .flatMap(auth -> userRepository.findByAuthenticationInfoId(auth.getId()));
+    }
+
+    private UserEntity createNewEntity(Long chatId, UserDto dto) {
         UserEntity entity = userMapper.toEntity(dto);
         entity.setId(UUID.randomUUID());
         entity.setNew(true);

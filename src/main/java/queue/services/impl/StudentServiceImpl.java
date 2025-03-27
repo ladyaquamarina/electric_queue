@@ -22,20 +22,25 @@ public class StudentServiceImpl implements StudentService {
     private final StudentMapper studentMapper;
 
     @Override
-    public Mono<StudentEntity> createNewStudent(StudentDto dto) {
-        return userService.createNewUser(dto.getUser())
+    public Mono<StudentEntity> createNewStudent(Long chatId, StudentDto dto) {
+        return userService.createNewUser(chatId, dto.getUser())
                 .map(user -> dtoToEntity(dto, user))
-                .flatMap(studentRepository::save);
+                .flatMap(student -> studentRepository.findByUserId(student.getUserId())
+                        .switchIfEmpty(studentRepository.save(student)));
     }
 
     @Override
-    public Mono<StudentEntity> updateStudent(UUID studentId, StudentDto dto) {
+    public Mono<StudentEntity> updateStudent(Long chatId, StudentDto dto) {
+        return userService.getByChatId(chatId)
+    }
+
+    private Mono<StudentEntity> updateStudent(StudentDto dto) {
         return checkNecessityToUpdateUser(dto.getUser())
                 .flatMap(check -> userService.updateUser(dto.getUser()))
                 .then(studentRepository.findById(dto.getId()))
                 .flatMap(oldStudent -> updateStudent(dto, oldStudent)
-                        .map(studentRepository::save))
-                .flatMap(updatedStudent -> updatedStudent);
+                        .flatMap(studentRepository::save)
+                        .switchIfEmpty(Mono.just(oldStudent)));
     }
 
     private Mono<Boolean> checkNecessityToUpdateUser(UserDto dto) {

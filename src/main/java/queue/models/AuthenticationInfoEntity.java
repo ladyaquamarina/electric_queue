@@ -3,6 +3,7 @@ package queue.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
@@ -13,20 +14,13 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("user")
-public class UserEntity implements Persistable<UUID> {
+@Table("authentication_info")
+public class AuthenticationInfoEntity implements Persistable<UUID> {
+    @Id
     @Column("id")
     private UUID id;
-    @Column("first_name")
-    private String firstName;
-    @Column("last_name")
-    private String lastName;
-    @Column("sur_name")
-    private String surName;
-    @Column("mail")
-    private String mail;
-    @Column("authentication_info_id")
-    private UUID authenticationInfoId;
+    @Column("chat_id")
+    private Long chatId;
 
     @Transient
     private boolean isNew = false;

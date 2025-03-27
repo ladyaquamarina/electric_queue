@@ -24,6 +24,7 @@ public class AuthenticationController {
                 .map(UserEntity::getId);
     }
 
+    // возвращает айди чата
     @PostMapping("/code")
     public Mono<String> checkCode(
             @RequestParam("userId") UUID userId,
