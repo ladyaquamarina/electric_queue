@@ -16,13 +16,13 @@ import queue.models.PetitionEntity;
                 StudentMapper.class})
 public interface PetitionMapper {
     @InheritInverseConfiguration
+    @Mapping(target = "id", ignore = true)
     @Mapping(source = "purpose", target = "purpose", qualifiedByName = "purposeDtoToEntity")
     @Mapping(source = "status", target = "status", qualifiedByName = "statusDtoToEntity")
     @Mapping(target = "student", ignore = true)
     @Mapping(target = "deputyDean", ignore = true)
     @Mapping(target = "daySchedule", ignore = true)
     PetitionEntity toEntity(PetitionDto dto);
-
 
     @Mapping(source = "purpose", target = "purpose", qualifiedByName = "purposeEntityToDto")
     @Mapping(source = "status", target = "status", qualifiedByName = "statusEntityToDto")

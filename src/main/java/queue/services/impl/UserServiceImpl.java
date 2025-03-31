@@ -36,9 +36,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Mono<UserEntity> getByChatId(Long chatId) {
-        return authenticationService.getByChatId(chatId)
-                .flatMap(auth -> userRepository.findByAuthenticationInfoId(auth.getId()));
+    public Mono<UserEntity> getByAuthId(UUID authId) {
+        return userRepository.findByAuthenticationInfoId(authId);
     }
 
     private UserEntity createNewEntity(Long chatId, UserDto dto) {

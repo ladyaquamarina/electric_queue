@@ -12,6 +12,7 @@ import queue.services.StudentService;
 import queue.services.UserService;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -31,17 +32,17 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Mono<StudentEntity> updateStudent(Long chatId, StudentDto dto) {
-        return userService.getByChatId(chatId)
-                .flatMap(user -> studentRepository.findByUserId(user.getId()))
-                .flatMap(student -> )
+        return checkNecessityToUpdateUser(dto.getUser())
+                .flatMap(check -> userService.updateUser(dto.getUser()))
+                .then(studentRepository.findById(dto.getId()))
+                .flatMap(oldStudent -> updateStudentEntity(dto, oldStudent)
+                        .flatMap(studentRepository::save)
+                        .switchIfEmpty(Mono.just(oldStudent)));
     }
 
-    private Mono<StudentEntity> updateStudent(StudentDto newDto, StudentEntity oldEntity) {
-        return checkNecessityToUpdateUser(newDto.getUser())
-                .flatMap(check -> userService.updateUser(newDto.getUser()))
-                .then(updateStudentEntity(newDto, oldEntity)
-                        .flatMap(studentRepository::save)
-                        .switchIfEmpty(Mono.just(oldEntity)));
+    @Override
+    public Mono<StudentEntity> getByUserId(UUID userId) {
+        return studentRepository.findByUserId(userId);
     }
 
     private Mono<StudentEntity> updateStudentEntity(StudentDto newDto, StudentEntity oldEntity) {

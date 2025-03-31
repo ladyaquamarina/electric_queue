@@ -10,13 +10,13 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 public interface PetitionService {
-    Mono<PetitionEntity> createPetitionByStudent(UUID studentId, PetitionDto dto);
+    Mono<PetitionEntity> createPetitionByStudent(UUID userId, PetitionDto dto);
 
-    Mono<PetitionEntity> createPetitionByDeputyDean(UUID deputyDeanId, PetitionDto dto);
+    Mono<PetitionEntity> createPetitionByDeputyDean(UUID userId, PetitionDto dto);
 
-    Mono<PetitionEntity> canselPetition(UUID studentId, UUID petitionId);
+    Mono<PetitionEntity> canselPetition(UUID userId, UUID petitionId);
 
-    Flux<PetitionEntity> getAllActivePetitions(UUID studentId);
+    Flux<PetitionEntity> getAllActivePetitions(UUID userId);
 
-    Mono<PetitionEntity> completePetition(UUID deputyDeanId, UUID petitionId);
+    Mono<PetitionEntity> completePetition(UUID userId, UUID petitionId);
 }

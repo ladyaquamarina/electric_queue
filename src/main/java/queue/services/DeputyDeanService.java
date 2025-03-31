@@ -7,7 +7,9 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 public interface DeputyDeanService {
-    Mono<DeputyDeanEntity> createNewDeputyDean(DeputyDeanDto dto);
+    Mono<DeputyDeanEntity> createNewDeputyDean(Long chatId, DeputyDeanDto dto);
 
-    Mono<DeputyDeanEntity> updateDeputyDean(UUID deputyDeanId, DeputyDeanDto dto);
+    Mono<DeputyDeanEntity> updateDeputyDean(Long chatId, DeputyDeanDto dto);
+
+    Mono<DeputyDeanEntity> getByUserId(UUID userId);
 }
