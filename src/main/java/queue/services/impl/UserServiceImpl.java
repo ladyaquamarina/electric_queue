@@ -35,11 +35,6 @@ public class UserServiceImpl implements UserService {
                 .flatMap(oldUser -> userRepository.save(userMapper.update(oldUser, newUser)));
     }
 
-    @Override
-    public Mono<UserEntity> getByAuthId(UUID authId) {
-        return userRepository.findByAuthenticationInfoId(authId);
-    }
-
     private UserEntity createNewEntity(Long chatId, UserDto dto) {
         UserEntity entity = userMapper.toEntity(dto);
         entity.setId(UUID.randomUUID());

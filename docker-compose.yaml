@@ -32,3 +32,11 @@ services:
       POSTGRES_PASSWORD: "postgres"
     ports:
       - '6432:5432'
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6380:6380
+#    environment:
+#      REDIS_PASSWORD: password
+#      REDIS_USER: user

@@ -10,5 +10,4 @@ public interface UserService {
     Mono<UserEntity> createNewUser(Long chatId, UserDto dto);
 
     Mono<UserEntity> updateUser(UserDto user);
-    Mono<UserEntity> getByAuthId(UUID authId);
 }

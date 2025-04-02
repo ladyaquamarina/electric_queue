@@ -7,6 +7,7 @@ import queue.models.UserEntity;
 import queue.repositories.AuthenticationInfoRepository;
 import queue.repositories.AuthenticationRedisRepository;
 import queue.services.AuthenticationService;
+import queue.services.UserAuthenticationService;
 import queue.services.UserService;
 import reactor.core.publisher.Mono;
 
@@ -18,7 +19,7 @@ import java.util.UUID;
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationInfoRepository authenticationInfoRepository;
     private final AuthenticationRedisRepository authenticationRedisRepository;
-    private final UserService userService;
+    private final UserAuthenticationService userAuthenticationService;
 
     @Override
     public Mono<AuthenticationInfoEntity> updateChatId(UUID id, Long chatId) {
@@ -39,7 +40,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public Mono<UUID> checkChatIdMatchUserId(Long chatId, UUID userId) {
         return authenticationRedisRepository.findByChatId(chatId)
                 .switchIfEmpty(authenticationInfoRepository.findByChatId(chatId)
-                        .flatMap(auth -> userService.getByAuthId(auth.getId()))
+                        .flatMap(auth -> userAuthenticationService.getByAuthId(auth.getId()))
                         .map(UserEntity::getId))
                 .filter(id -> Objects.equals(id, userId));
     }
