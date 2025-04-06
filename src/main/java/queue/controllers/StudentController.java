@@ -43,7 +43,8 @@ public class StudentController {
     @PostMapping("/new")
     public Mono<StudentDto> createNewStudent(@RequestParam Long chatId,
                                              @RequestBody StudentDto dto) {
-        return studentService.createNewStudent(chatId, dto)
+        return authenticationService.getUserIdByChatId(chatId)
+                .flatMap(userId -> studentService.createNewStudent(chatId, dto))
                 .map(studentMapper::toDto);
     }
 

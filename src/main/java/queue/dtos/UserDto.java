@@ -15,5 +15,4 @@ public class UserDto {
     private String lastName;
     private String surName;
     private String mail;
-    // authenticationInfoId возвращать нельзя!!!
 }

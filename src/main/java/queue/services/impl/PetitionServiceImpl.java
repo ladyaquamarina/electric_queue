@@ -23,7 +23,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PetitionServiceImpl implements PetitionService {
     private final PetitionRepository petitionRepository;
-    private final UserCacheRedisRepository userCacheRedisRepository;  // кэш userId->studentId
+    private final UserCacheRedisRepository userCacheRedisRepository;  // кэш userId -> studentId или deputyDeanId
 
     private final StudentService studentService;
     private final DeputyDeanService deputyDeanService;
@@ -36,7 +36,8 @@ public class PetitionServiceImpl implements PetitionService {
         return userCacheRedisRepository.findByUserId(userId)
                 .switchIfEmpty(studentService.getByUserId(userId)
                         .map(StudentEntity::getId))
-                .map(studentId -> dtoToEntity(dto, studentId, null));
+                .map(studentId -> dtoToEntity(dto, studentId, null))
+                .flatMap(petitionRepository::save);
     }
 
     @Override
@@ -44,12 +45,14 @@ public class PetitionServiceImpl implements PetitionService {
         return userCacheRedisRepository.findByUserId(userId)
                 .switchIfEmpty(deputyDeanService.getByUserId(userId)
                         .map(DeputyDeanEntity::getId))
-                .map(deputyDeanId -> dtoToEntity(dto, null, deputyDeanId));
+                .map(deputyDeanId -> dtoToEntity(dto, null, deputyDeanId))
+                .flatMap(petitionRepository::save);
     }
 
     @Override
     public Mono<PetitionEntity> canselPetition(UUID userId, UUID petitionId) {
-        return null;
+        return userCacheRedisRepository.findByUserId(userId)
+                .switchIfEmpty(studentService.getByUserId(userId));
     }
 
     @Override

@@ -4,8 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06b90036-5019-494c-9140-8a3ee15e6791" name="Changes" comment="sixth commit">
+    <list default="true" id="b2dbc857-f7af-4fea-82b9-c264271bf863" name="Changes" comment="fiftieth commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/queue/models/MailApproveEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/MailApproveRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/queue/services/MailApproveService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/MailApproveServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/config/RedisConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/DeputyDeanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/DeputyDeanController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/StudentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/dtos/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/dtos/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/mappers/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/mappers/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/models/AuthenticationInfoEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/models/AuthenticationInfoEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/models/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/models/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/AuthenticationRedisRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/AuthenticationRedisRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/PetitionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/PetitionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/UserAuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/UserAuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/AuthenticationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/AuthenticationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/PetitionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/PetitionServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/UserAuthenticationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/UserAuthenticationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/utils/Utils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,17 +39,21 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 4
 }</component>
-  <component name="ProjectId" id="2v2fBNsqJcv51CQsIgFr1PwK2ds" />
+  <component name="ProjectId" id="2vDnSmVnwOL4DSp8QUKLMeZi48C" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,20 +61,35 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Docker.docker-compose.yaml.db: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yaml.kafka: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yaml.redis: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.electron_queue [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.electron_queue [compile].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;Spring Boot.ElectricQueueApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean" />
+      <command value="mvn compile" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ElectricQueueApplication">
     <configuration name="ElectricQueueApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="electron_queue" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="queue.ElectricQueueApplication" />
@@ -55,28 +97,69 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yaml.db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="db" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yaml.kafka: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="kafka" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yaml.redis: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="redis" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker-compose.yaml.redis: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml.db: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml.kafka: Compose Deployment" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="06b90036-5019-494c-9140-8a3ee15e6791" name="Changes" comment="" />
-      <created>1743347958571</created>
+      <changelist id="b2dbc857-f7af-4fea-82b9-c264271bf863" name="Changes" comment="fiftieth commit" />
+      <created>1743688515694</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1743347958571</updated>
-      <workItem from="1743347958574" duration="602000" />
-      <workItem from="1743349967554" duration="4102000" />
-      <workItem from="1743457071252" duration="12565000" />
+      <updated>1743688515694</updated>
+      <workItem from="1743688517873" duration="12505000" />
     </task>
-    <task id="LOCAL-00001" summary="sixth commit">
-      <option name="closed" value="true" />
-      <created>1743465153992</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1743465153992</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -94,7 +177,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="sixth commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="sixth commit" />
+    <MESSAGE value="fiftieth commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="fiftieth commit" />
   </component>
 </project>

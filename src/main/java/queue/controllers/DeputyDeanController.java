@@ -58,68 +58,80 @@ public class DeputyDeanController {
     }
 
     @PostMapping("/day_schedule/new")
-    public Mono<DayScheduleDto> createDaySchedule(
-            @RequestParam Long chatId,
-            @RequestParam UUID userId,
-            @RequestBody DayScheduleDto dto) {
-        return dayScheduleService.createNewDaySchedule(deputyDeanId, dto)
-                .map(dayScheduleMapper::toDto);
+    public Mono<DayScheduleDto> createDaySchedule(@RequestParam Long chatId,
+                                                  @RequestParam UUID userId,
+                                                  @RequestParam UUID deputyDeanId,
+                                                  @RequestBody DayScheduleDto dto) {
+        return authenticationService.checkChatIdMatchUserId(chatId, userId)
+                .flatMap(check -> dayScheduleService.createNewDaySchedule(deputyDeanId, dto))
+                .map(dayScheduleMapper::toDto)
+                .switchIfEmpty(Mono.error(authError()));
     }
 
     @PostMapping("/day_schedule/update")
-    public Mono<DayScheduleDto> updateDaySchedule(
-            @RequestParam Long chatId,
-            @RequestParam UUID userId,
-            @RequestBody DayScheduleDto dto) {
-        return dayScheduleService.updateDaySchedule(deputyDeanId, dto)
-                .map(dayScheduleMapper::toDto);
+    public Mono<DayScheduleDto> updateDaySchedule(@RequestParam Long chatId,
+                                                  @RequestParam UUID userId,
+                                                  @RequestParam UUID deputyDeanId,
+                                                  @RequestBody DayScheduleDto dto) {
+        return authenticationService.checkChatIdMatchUserId(chatId, userId)
+                .flatMap(check -> dayScheduleService.updateDaySchedule(deputyDeanId, dto))
+                .map(dayScheduleMapper::toDto)
+                .switchIfEmpty(Mono.error(authError()));
     }
 
     @PostMapping("/day_schedule/start")
-    public Mono<DayScheduleDto> startDaySchadule(
-            @RequestParam Long chatId,
-            @RequestParam UUID userId,
-            @PathVariable UUID dayScheduleId) {
-        return dayScheduleService.startDaySchedule(deputyDeanId, dayScheduleId)
-                .map(dayScheduleMapper::toDto);
+    public Mono<DayScheduleDto> startDaySchadule(@RequestParam Long chatId,
+                                                 @RequestParam UUID userId,
+                                                 @RequestParam UUID deputyDeanId,
+                                                 @PathVariable UUID dayScheduleId) {
+        return authenticationService.checkChatIdMatchUserId(chatId, userId)
+                .flatMap(check -> dayScheduleService.startDaySchedule(deputyDeanId, dayScheduleId))
+                .map(dayScheduleMapper::toDto)
+                .switchIfEmpty(Mono.error(authError()));
     }
 
     @PostMapping("/day_schedule/end")
-    public Mono<DayScheduleDto> endDaySchedule(
-            @RequestParam Long chatId,
-            @RequestParam UUID userId,
-            @PathVariable UUID deputyDeanId,
-            @PathVariable UUID dayScheduleId) {
-        return dayScheduleService.endDaySchedule(deputyDeanId, dayScheduleId)
-                .map(dayScheduleMapper::toDto);
+    public Mono<DayScheduleDto> endDaySchedule(@RequestParam Long chatId,
+                                               @RequestParam UUID userId,
+                                               @RequestParam UUID deputyDeanId,
+                                               @PathVariable UUID dayScheduleId) {
+        return authenticationService.checkChatIdMatchUserId(chatId, userId)
+                .flatMap(check -> dayScheduleService.endDaySchedule(deputyDeanId, dayScheduleId))
+                .map(dayScheduleMapper::toDto)
+                .switchIfEmpty(Mono.error(authError()));
     }
 
     @GetMapping("/day_schedule/active")
     public Flux<DayScheduleDto> getAllActiveDaySchedule(
             @RequestParam Long chatId,
             @RequestParam UUID userId,
-            @PathVariable UUID deputyDeanId) {
-        return dayScheduleService.getAllActiveDaySchedule(deputyDeanId)
-                .map(dayScheduleMapper::toDto);
+            @RequestParam UUID deputyDeanId) {
+        return authenticationService.checkChatIdMatchUserId(chatId, userId)
+                .flatMapMany(check -> dayScheduleService.getAllActiveDaySchedule(deputyDeanId))
+                .map(dayScheduleMapper::toDto)
+                .switchIfEmpty(Mono.error(authError()));
     }
 
     @GetMapping("/day_schedule/canceled")
     public Flux<DayScheduleDto> getAllCanceledDaySchedule(
             @RequestParam Long chatId,
             @RequestParam UUID userId,
-            @PathVariable UUID deputyDeanId) {
-        return dayScheduleService.getAllCanceledDaySchedule(deputyDeanId)
-                .map(dayScheduleMapper::toDto);
+            @RequestParam UUID deputyDeanId) {
+        return authenticationService.checkChatIdMatchUserId(chatId, userId)
+                .flatMapMany(check -> dayScheduleService.getAllCanceledDaySchedule(deputyDeanId))
+                .map(dayScheduleMapper::toDto)
+                .switchIfEmpty(Mono.error(authError()));
     }
 
     @PostMapping("/petition")
     public Mono<PetitionDto> createPetition(
             @RequestParam Long chatId,
             @RequestParam UUID userId,
-            @PathVariable UUID deputyDeanId,
             @RequestBody PetitionDto dto) {
-        return petitionService.createPetitionByDeputyDean(deputyDeanId, dto)
-                .map(petitionMapper::toDto);
+        return authenticationService.checkChatIdMatchUserId(chatId, userId)
+                .flatMap(check -> petitionService.createPetitionByDeputyDean(userId, dto))
+                .map(petitionMapper::toDto)
+                .switchIfEmpty(Mono.error(authError()));
     }
 
     //возвращает следующее в очереди обращение
@@ -128,7 +140,9 @@ public class DeputyDeanController {
             @RequestParam Long chatId,
             @RequestParam UUID userId,
             @RequestParam UUID petitionId) {
-        return petitionService.completePetition(deputyDeanId, petitionId)
-                .map(petitionMapper::toDto);
+        return authenticationService.checkChatIdMatchUserId(chatId, userId)
+                .flatMap(check -> petitionService.completePetition(userId, petitionId))
+                .map(petitionMapper::toDto)
+                .switchIfEmpty(Mono.error(authError()));
     }
 }

@@ -7,15 +7,13 @@ import queue.repositories.UserRepository;
 import queue.services.UserAuthenticationService;
 import reactor.core.publisher.Mono;
 
-import java.util.UUID;
-
 @Service
 @RequiredArgsConstructor
 public class UserAuthenticationServiceImpl implements UserAuthenticationService {
     private final UserRepository userRepository;
 
     @Override
-    public Mono<UserEntity> getByAuthId(UUID authId) {
-        return userRepository.findByAuthenticationInfoId(authId);
+    public Mono<UserEntity> getByMail(String mail) {
+        return userRepository.findByMail(mail);
     }
 }

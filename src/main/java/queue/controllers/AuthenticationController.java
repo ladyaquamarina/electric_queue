@@ -19,16 +19,20 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/mail")
-    public Mono<UUID> getMail(@RequestBody String mail) {
-        return authenticationService.createNewUser(mail)
-                .map(UserEntity::getId);
+    public Mono<Void> sendMail(@RequestParam String mail) {
+        return authenticationService.sendMail(mail);
     }
+
+//    @PostMapping("/mail")
+//    public Mono<UUID> getMail(@RequestBody String mail) {
+//        return authenticationService.createNewUser(mail)
+//                .map(UserEntity::getId);
+//    }
 
     // возвращает айди чата
     @PostMapping("/code")
-    public Mono<String> checkCode(
-            @RequestParam("userId") UUID userId,
-            @RequestParam("code") String code) {
-        return authenticationService.checkCode(userId, code);
+    public Mono<Long> checkCode(@RequestParam("chatId") Long chatId,
+                                  @RequestParam("code") String code) {
+        return authenticationService.checkCode(chatId, code);
     }
 }

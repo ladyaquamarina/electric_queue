@@ -6,5 +6,5 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 public interface UserAuthenticationService {
-    Mono<UserEntity> getByAuthId(UUID authId);
+    Mono<UserEntity> getByMail(String mail);
 }
