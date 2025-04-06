@@ -14,7 +14,7 @@ public interface PetitionService {
 
     Mono<PetitionEntity> createPetitionByDeputyDean(UUID userId, PetitionDto dto);
 
-    Mono<PetitionEntity> canselPetition(UUID userId, UUID petitionId);
+    Mono<PetitionEntity> cancelPetition(UUID userId, UUID petitionId);
 
     Flux<PetitionEntity> getAllActivePetitions(UUID userId);
 

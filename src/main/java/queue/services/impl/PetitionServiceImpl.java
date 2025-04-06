@@ -1,15 +1,14 @@
 package queue.services.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.stereotype.Service;
 import queue.dtos.PetitionDto;
+import queue.enums.PetitionStatus;
 import queue.mappers.PetitionMapper;
 import queue.models.DeputyDeanEntity;
 import queue.models.PetitionEntity;
 import queue.models.StudentEntity;
 import queue.repositories.PetitionRepository;
-import queue.repositories.UserCacheRedisRepository;
 import queue.services.DeputyDeanService;
 import queue.services.PetitionService;
 import queue.services.QueueService;
@@ -23,7 +22,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PetitionServiceImpl implements PetitionService {
     private final PetitionRepository petitionRepository;
-    private final UserCacheRedisRepository userCacheRedisRepository;  // кэш userId -> studentId или deputyDeanId
 
     private final StudentService studentService;
     private final DeputyDeanService deputyDeanService;
@@ -33,39 +31,48 @@ public class PetitionServiceImpl implements PetitionService {
 
     @Override
     public Mono<PetitionEntity> createPetitionByStudent(UUID userId, PetitionDto dto) {
-        return userCacheRedisRepository.findByUserId(userId)
-                .switchIfEmpty(studentService.getByUserId(userId)
-                        .map(StudentEntity::getId))
-                .map(studentId -> dtoToEntity(dto, studentId, null))
-                .flatMap(petitionRepository::save);
+        return studentService.getByUserId(userId)
+                .map(StudentEntity::getId)
+                .map(studentId -> createPetition(dto, studentId, null))
+                .flatMap(petitionRepository::save); // TODO: прикрутить добавление в очередь
     }
 
     @Override
     public Mono<PetitionEntity> createPetitionByDeputyDean(UUID userId, PetitionDto dto) {
-        return userCacheRedisRepository.findByUserId(userId)
-                .switchIfEmpty(deputyDeanService.getByUserId(userId)
-                        .map(DeputyDeanEntity::getId))
-                .map(deputyDeanId -> dtoToEntity(dto, null, deputyDeanId))
+        return deputyDeanService.getByUserId(userId)
+                .map(DeputyDeanEntity::getId)
+                .map(deputyDeanId -> createPetition(dto, null, deputyDeanId))
                 .flatMap(petitionRepository::save);
     }
 
     @Override
-    public Mono<PetitionEntity> canselPetition(UUID userId, UUID petitionId) {
-        return userCacheRedisRepository.findByUserId(userId)
-                .switchIfEmpty(studentService.getByUserId(userId));
+    public Mono<PetitionEntity> cancelPetition(UUID userId, UUID petitionId) {
+        return petitionRepository.findById(petitionId)
+                .map(petition -> {
+                    petition.setStatus(PetitionStatus.CANCELLED);
+                    return petition;
+                })
+                .flatMap(petitionRepository::save);
     }
 
     @Override
     public Flux<PetitionEntity> getAllActivePetitions(UUID userId) {
-        return null;
+        return studentService.getByUserId(userId)
+                .map(StudentEntity::getId)
+                .flatMapMany(petitionRepository::findAllByStudentId);
     }
 
     @Override
     public Mono<PetitionEntity> completePetition(UUID userId, UUID petitionId) {
-        return null;
+        return petitionRepository.findById(petitionId)
+                .map(petition  -> {
+                    petition.setStatus(PetitionStatus.PROCESSED);
+                    return petition;
+                })
+                .flatMap(petitionRepository::save);
     }
 
-    private PetitionEntity dtoToEntity(PetitionDto dto, UUID studentId, UUID deputyDeanId) {
+    private PetitionEntity createPetition(PetitionDto dto, UUID studentId, UUID deputyDeanId) {
         PetitionEntity entity = petitionMapper.toEntity(dto);
         entity.setId(UUID.randomUUID());
         if (studentId != null) {

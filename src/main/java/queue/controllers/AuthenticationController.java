@@ -19,8 +19,9 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/mail")
-    public Mono<Void> sendMail(@RequestParam String mail) {
-        return authenticationService.sendMail(mail);
+    public Mono<Void> sendMail(@RequestParam String mail,
+                               @RequestParam Long chatId) {
+        return authenticationService.sendMail(mail, chatId);
     }
 
 //    @PostMapping("/mail")
@@ -29,10 +30,10 @@ public class AuthenticationController {
 //                .map(UserEntity::getId);
 //    }
 
-    // возвращает айди чата
+    // возвращает userId
     @PostMapping("/code")
-    public Mono<Long> checkCode(@RequestParam("chatId") Long chatId,
-                                  @RequestParam("code") String code) {
+    public Mono<UUID> checkCode(@RequestParam("chatId") Long chatId,
+                                @RequestParam("code") String code) {
         return authenticationService.checkCode(chatId, code);
     }
 }

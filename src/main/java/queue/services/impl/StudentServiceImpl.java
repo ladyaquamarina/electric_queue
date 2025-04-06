@@ -23,8 +23,8 @@ public class StudentServiceImpl implements StudentService {
     private final StudentMapper studentMapper;
 
     @Override
-    public Mono<StudentEntity> createNewStudent(Long chatId, StudentDto dto) {
-        return userService.createNewUser(chatId, dto.getUser())
+    public Mono<StudentEntity> createNewStudent(UUID userId, StudentDto dto) {
+        return userService.createNewUser(userId, dto.getUser())
                 .map(user -> dtoToEntity(dto, user))
                 .flatMap(student -> studentRepository.findByUserId(student.getUserId())
                         .switchIfEmpty(studentRepository.save(student)));
@@ -32,8 +32,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Mono<StudentEntity> updateStudent(Long chatId, StudentDto dto) {
-        return checkNecessityToUpdateUser(dto.getUser())
-                .flatMap(check -> userService.updateUser(dto.getUser()))
+        return userService.updateUser(dto.getUser())
                 .then(studentRepository.findById(dto.getId()))
                 .flatMap(oldStudent -> updateStudentEntity(dto, oldStudent)
                         .flatMap(studentRepository::save)
@@ -48,13 +47,6 @@ public class StudentServiceImpl implements StudentService {
     private Mono<StudentEntity> updateStudentEntity(StudentDto newDto, StudentEntity oldEntity) {
         if (newDto.getCourse() != null || newDto.getGroup() != null) {
             return Mono.just(studentMapper.update(oldEntity, newDto));
-        }
-        return Mono.empty();
-    }
-
-    private Mono<Boolean> checkNecessityToUpdateUser(UserDto dto) {
-        if (dto.getFirstName() == null && dto.getLastName() == null && dto.getSurName() == null) {
-            return Mono.just(false);
         }
         return Mono.empty();
     }

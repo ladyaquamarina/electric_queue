@@ -31,3 +31,15 @@ spring:
       port: 6380
       password: password
       ssl: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: tretyakmd@gmail.com
+    password: ${GMAIL_VKRB_PASSWORD}
+    properties:
+      "mail.transport.protocol": smtps
+      "mail.smtp.auth": true
+      "mail.smtp.starttls.enable": true
+      "mail.smtp.ssl.enable": true
+    protocol: smtps

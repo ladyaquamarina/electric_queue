@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 public interface UserService {
-    Mono<UserEntity> createNewUser(Long chatId, UserDto dto);
+    Mono<UserEntity> createNewUser(UUID userId, UserDto dto);
 
     Mono<UserEntity> updateUser(UserDto user);
 }

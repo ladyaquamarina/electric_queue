@@ -17,15 +17,22 @@ import java.util.UUID;
 @Table("authentication_info")
 public class AuthenticationInfoEntity implements Persistable<UUID> {
     @Id
-    @Column("id")
-    private UUID id;
+    @Column("userId")
+    private UUID userId;    // соответствует user.id
     @Column("chat_id")
     private Long chatId;
-    @Column("userId")
-    private UUID userId;
     @Column("mail")
     private String mail;
 
     @Transient
     private boolean isNew = false;
+
+    public UUID getId()  {
+        return userId;
+    }
+
+    public UUID setId(UUID id) {
+        this.userId = id;
+        return this.userId;
+    }
 }

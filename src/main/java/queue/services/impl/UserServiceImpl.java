@@ -20,25 +20,29 @@ public class UserServiceImpl implements UserService {
     private final AuthenticationService authenticationService;
 
     @Override
-    public Mono<UserEntity> createNewUser(Long chatId, UserDto dto) {
-        String mail = dto.getMail();
-        UserEntity entity = createNewEntity(chatId, dto);
-        return userRepository.findByMail(mail)
-                .flatMap(user -> authenticationService.updateChatId(user.getAuthenticationInfoId(), chatId)
-                        .map(auth -> user))
-                .switchIfEmpty(userRepository.save(entity));
+    public Mono<UserEntity> createNewUser(UUID userId, UserDto dto) {
+        UserEntity entity = createNewEntity(userId, dto);
+        return userRepository.save(entity);
     }
 
     @Override
     public Mono<UserEntity> updateUser(UserDto newUser) {
-        return userRepository.findById(newUser.getId())
+        return checkNecessityToUpdateUser(newUser)
+                .flatMap(check -> userRepository.findById(newUser.getId()))
                 .flatMap(oldUser -> userRepository.save(userMapper.update(oldUser, newUser)));
     }
 
-    private UserEntity createNewEntity(Long chatId, UserDto dto) {
+    private UserEntity createNewEntity(UUID userId, UserDto dto) {
         UserEntity entity = userMapper.toEntity(dto);
-        entity.setId(UUID.randomUUID());
+        entity.setId(userId);
         entity.setNew(true);
         return entity;
+    }
+
+    private Mono<Boolean> checkNecessityToUpdateUser(UserDto dto) {
+        if (dto.getFirstName() != null || dto.getLastName() != null || dto.getSurName() != null) {
+            return Mono.just(false);
+        }
+        return Mono.empty();
     }
 }

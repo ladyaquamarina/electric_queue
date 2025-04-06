@@ -44,17 +44,17 @@ public class StudentController {
     public Mono<StudentDto> createNewStudent(@RequestParam Long chatId,
                                              @RequestBody StudentDto dto) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMap(userId -> studentService.createNewStudent(chatId, dto))
-                .map(studentMapper::toDto);
+                .flatMap(userId -> studentService.createNewStudent(userId, dto))
+                .map(studentMapper::toDto)
+                .switchIfEmpty(Mono.error(authError()));
     }
 
     @PostMapping("/update")
     public Mono<StudentDto> updateStudent(
             @RequestParam Long chatId,
-            @RequestParam UUID userId,
             @RequestBody StudentDto dto) {
-        return authenticationService.checkChatIdMatchUserId(chatId, userId)
-                .flatMap(check -> studentService.updateStudent(chatId, dto))
+        return authenticationService.getUserIdByChatId(chatId)
+                .flatMap(userId -> studentService.updateStudent(chatId, dto))
                 .map(studentMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }
@@ -62,10 +62,9 @@ public class StudentController {
     @PostMapping("/petition")
     public Mono<PetitionDto> createPetition(
             @RequestParam Long chatId,
-            @RequestParam UUID userId,
             @RequestBody PetitionDto dto) {
-        return authenticationService.checkChatIdMatchUserId(chatId, userId)
-                .flatMap(check -> petitionService.createPetitionByStudent(userId, dto))
+        return authenticationService.getUserIdByChatId(chatId)
+                .flatMap(userId -> petitionService.createPetitionByStudent(userId, dto))
                 .map(petitionMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }
@@ -73,20 +72,17 @@ public class StudentController {
     @DeleteMapping("/petition")
     public Mono<String> cancelPetition(
             @RequestParam Long chatId,
-            @RequestParam UUID userId,
             @RequestParam UUID petitionId) {
-        return authenticationService.checkChatIdMatchUserId(chatId, userId)
-                .flatMap(check -> petitionService.canselPetition(userId, petitionId))
+        return authenticationService.getUserIdByChatId(chatId)
+                .flatMap(userId -> petitionService.cancelPetition(userId, petitionId))
                 .map(petition -> SUCCESS)
                 .switchIfEmpty(Mono.error(authError()));
     }
 
     @GetMapping("/petition/all")
-    public Flux<PetitionDto> getAllActivePetitions(
-            @RequestParam Long chatId,
-            @RequestParam UUID userId) {
-        return authenticationService.checkChatIdMatchUserId(chatId, userId)
-                .flatMapMany(check -> petitionService.getAllActivePetitions(userId))
+    public Flux<PetitionDto> getAllActivePetitions(@RequestParam Long chatId) {
+        return authenticationService.getUserIdByChatId(chatId)
+                .flatMapMany(userId -> petitionService.getAllActivePetitions(userId))
                 .map(petitionMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }
@@ -94,10 +90,9 @@ public class StudentController {
     @GetMapping("/day_schedule/{deputyDeanId}")
     public Flux<DayScheduleDto> getDaySchedules(
             @RequestParam Long chatId,
-            @RequestParam UUID userId,
             @PathVariable UUID deputyDeanId) {
-        return authenticationService.checkChatIdMatchUserId(chatId, userId)
-                .flatMapMany(check -> dayScheduleService.getDaySchedules(userId, deputyDeanId))
+        return authenticationService.getUserIdByChatId(chatId)
+                .flatMapMany(userId -> dayScheduleService.getDaySchedules(userId, deputyDeanId))
                 .map(dayScheduleMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }

@@ -10,4 +10,6 @@ import java.util.UUID;
 @Repository
 public interface AuthenticationInfoRepository extends R2dbcRepository<AuthenticationInfoEntity, UUID> {
     Mono<AuthenticationInfoEntity> findByChatId(Long chatId);
+
+    Mono<AuthenticationInfoEntity> findByMail(String mail);
 }

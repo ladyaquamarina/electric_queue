@@ -16,13 +16,14 @@ import java.util.UUID;
 @Table("user")
 public class UserEntity implements Persistable<UUID> {
     @Column("id")
-    private UUID id;
+    private UUID id;    // соответствует AuthenticationInfo.userId
     @Column("first_name")
     private String firstName;
     @Column("last_name")
     private String lastName;
     @Column("sur_name")
     private String surName;
+
     @Transient
     private boolean isNew = false;
 }

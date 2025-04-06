@@ -23,8 +23,8 @@ public class DeputyDeanServiceImpl implements DeputyDeanService {
     private final DeputyDeanMapper deputyDeanMapper;
 
     @Override
-    public Mono<DeputyDeanEntity> createNewDeputyDean(Long chatId, DeputyDeanDto dto) {
-        return userService.createNewUser(chatId, dto.getUser())
+    public Mono<DeputyDeanEntity> createNewDeputyDean(UUID userId, DeputyDeanDto dto) {
+        return userService.createNewUser(userId, dto.getUser())
                 .map(user -> dtoToEntity(dto, user))
                 .flatMap(deputyDean -> deputyDeanRepository.findByUserId(deputyDean.getUserId())
                         .switchIfEmpty(deputyDeanRepository.save(deputyDean)));
@@ -32,8 +32,7 @@ public class DeputyDeanServiceImpl implements DeputyDeanService {
 
     @Override
     public Mono<DeputyDeanEntity> updateDeputyDean(Long chatId, DeputyDeanDto dto) {
-        return checkNecessityToUpdateUser(dto.getUser())
-                .flatMap(check -> userService.updateUser(dto.getUser()))
+        return userService.updateUser(dto.getUser())
                 .then(deputyDeanRepository.findById(dto.getId()))
                 .flatMap(oldDeputyDean -> updateDeputyDeanEntity(dto, oldDeputyDean)
                         .flatMap(deputyDeanRepository::save)
@@ -48,13 +47,6 @@ public class DeputyDeanServiceImpl implements DeputyDeanService {
     private Mono<DeputyDeanEntity> updateDeputyDeanEntity(DeputyDeanDto newDto, DeputyDeanEntity oldEntity) {
         if (newDto.getCourse() != null || newDto.getFaculty() != null) {
             return Mono.just(deputyDeanMapper.update(oldEntity, newDto));
-        }
-        return Mono.empty();
-    }
-
-    private Mono<Boolean> checkNecessityToUpdateUser(UserDto dto) {
-        if (dto.getFirstName() == null && dto.getLastName() == null && dto.getSurName() == null) {
-            return Mono.just(false);
         }
         return Mono.empty();
     }

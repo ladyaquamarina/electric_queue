@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 public interface StudentService {
-    Mono<StudentEntity> createNewStudent(Long chatId, StudentDto dto);
+    Mono<StudentEntity> createNewStudent(UUID userId, StudentDto dto);
 
     Mono<StudentEntity> updateStudent(Long chatId, StudentDto dto);
 
