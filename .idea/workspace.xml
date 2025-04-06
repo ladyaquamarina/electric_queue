@@ -5,30 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2dbc857-f7af-4fea-82b9-c264271bf863" name="Changes" comment="fiftieth commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/queue/models/MailApproveEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/MailApproveRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/queue/services/MailApproveService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/MailApproveServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/config/RedisConfig.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/AuthenticationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/DeputyDeanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/DeputyDeanController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/StudentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/dtos/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/dtos/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/mappers/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/mappers/UserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/models/AuthenticationInfoEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/models/AuthenticationInfoEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/models/MailApproveEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/models/MailApproveEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/models/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/models/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/AuthenticationRedisRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/AuthenticationRedisRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/AuthenticationInfoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/AuthenticationInfoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/AuthenticationRedisRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/PetitionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/PetitionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/UserCacheRedisRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/UserAuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/UserAuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/DeputyDeanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/DeputyDeanService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/MailApproveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/MailApproveService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/PetitionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/PetitionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/UserAuthenticationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/AuthenticationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/AuthenticationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/DeputyDeanServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/DeputyDeanServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/MailApproveServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/MailApproveServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/PetitionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/PetitionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/UserAuthenticationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/UserAuthenticationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/StudentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/UserAuthenticationServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,30 +62,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.docker-compose.yaml.db: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yaml.kafka: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yaml.redis: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.electron_queue [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.electron_queue [compile].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ElectricQueueApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.docker-compose.yaml.db: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yaml.kafka: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yaml.redis: Compose Deployment.executor": "Run",
+    "Maven.electron_queue [clean].executor": "Run",
+    "Maven.electron_queue [compile].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.ElectricQueueApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/ucheba/proectirovanie/notificator",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.runner",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean" />
@@ -178,6 +182,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fiftieth commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="fiftieth commit" />
+    <MESSAGE value="eighth commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="eighth commit" />
   </component>
 </project>
