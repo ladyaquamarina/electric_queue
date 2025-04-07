@@ -82,7 +82,7 @@ public class StudentController {
     @GetMapping("/petition/all")
     public Flux<PetitionDto> getAllActivePetitions(@RequestParam Long chatId) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMapMany(userId -> petitionService.getAllActivePetitions(userId))
+                .flatMapMany(petitionService::getAllActivePetitions)
                 .map(petitionMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }
@@ -92,7 +92,7 @@ public class StudentController {
             @RequestParam Long chatId,
             @PathVariable UUID deputyDeanId) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMapMany(userId -> dayScheduleService.getDaySchedules(userId, deputyDeanId))
+                .flatMapMany(userId -> dayScheduleService.getDaySchedulesByDeputyDean(deputyDeanId))
                 .map(dayScheduleMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }

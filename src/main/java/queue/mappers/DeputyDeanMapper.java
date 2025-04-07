@@ -12,6 +12,7 @@ public interface DeputyDeanMapper {
     @InheritInverseConfiguration
     @Mapping(source = "id", target = "id")
     @Mapping(target = "user", ignore = true)
+    @Mapping(target = "new", ignore = true)
     DeputyDeanEntity toEntity(DeputyDeanDto dto);
 
     @Mapping(source = "id", target = "id")

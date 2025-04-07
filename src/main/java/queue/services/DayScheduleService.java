@@ -11,15 +11,15 @@ public interface DayScheduleService {
 
     Mono<DayScheduleEntity> createNewDaySchedule(UUID userId, DayScheduleDto dto);
 
-    Flux<DayScheduleEntity> getDaySchedules(UUID studentId, UUID deputyDeanId);
+    Flux<DayScheduleEntity> getDaySchedulesByUserId(UUID userId);
 
-    Flux<DayScheduleEntity> getAllActiveDaySchedule(UUID deputyDeanId);
+    Flux<DayScheduleEntity> getDaySchedulesByDeputyDean(UUID deputyDeanId);
 
-    Flux<DayScheduleEntity> getAllCanceledDaySchedule(UUID deputyDeanId);
+    Mono<DayScheduleEntity> updateDaySchedule(UUID userId, UUID dayScheduleId, DayScheduleDto dto);
 
-    Mono<DayScheduleEntity> updateDaySchedule(UUID deputyDeanId, DayScheduleDto dto);
+    Mono<DayScheduleEntity> startDaySchedule(UUID userId, UUID dayScheduleId);
 
-    Mono<DayScheduleEntity> startDaySchedule(UUID deputyDeanId, UUID dayScheduleId);
+    Mono<DayScheduleEntity> endDaySchedule(UUID userId, UUID dayScheduleId);
 
-    Mono<DayScheduleEntity> endDaySchedule(UUID deputyDeanId, UUID dayScheduleId);
+    Mono<String> deleteDaySchedule(UUID userId, UUID dayScheduleId);
 }

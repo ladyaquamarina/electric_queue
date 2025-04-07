@@ -12,6 +12,7 @@ import queue.models.UserEntity;
 public interface UserMapper {
     @InheritInverseConfiguration
     @Mapping(source = "id", target = "id")
+    @Mapping(target = "new", ignore = true)
     UserEntity toEntity(UserDto dto);
 
     @Mapping(source = "id", target = "id")

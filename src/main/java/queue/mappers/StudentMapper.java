@@ -17,6 +17,7 @@ public interface StudentMapper {
     @InheritInverseConfiguration
     @Mapping(source = "id", target = "id")
     @Mapping(target = "user", ignore = true)
+    @Mapping(target = "new", ignore = true)
     StudentEntity toEntity(StudentDto dto);
 
     @Mapping(source = "id", target = "id")

@@ -1,6 +1,7 @@
 package queue.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,51 +71,46 @@ public class DeputyDeanController {
 
     @PostMapping("/day_schedule/update")
     public Mono<DayScheduleDto> updateDaySchedule(@RequestParam Long chatId,
-                                                  @RequestParam UUID deputyDeanId,
+                                                  @RequestParam UUID dayScheduleId,
                                                   @RequestBody DayScheduleDto dto) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMap(userId -> dayScheduleService.updateDaySchedule(deputyDeanId, dto))
+                .flatMap(userId -> dayScheduleService.updateDaySchedule(userId, dayScheduleId, dto))
                 .map(dayScheduleMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }
 
     @PostMapping("/day_schedule/start")
     public Mono<DayScheduleDto> startDaySchadule(@RequestParam Long chatId,
-                                                 @RequestParam UUID deputyDeanId,
-                                                 @PathVariable UUID dayScheduleId) {
+                                                 @RequestParam UUID dayScheduleId) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMap(userId -> dayScheduleService.startDaySchedule(deputyDeanId, dayScheduleId))
+                .flatMap(userId -> dayScheduleService.startDaySchedule(userId, dayScheduleId))
                 .map(dayScheduleMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }
 
     @PostMapping("/day_schedule/end")
     public Mono<DayScheduleDto> endDaySchedule(@RequestParam Long chatId,
-                                               @RequestParam UUID deputyDeanId,
-                                               @PathVariable UUID dayScheduleId) {
+                                               @RequestParam UUID dayScheduleId) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMap(userId -> dayScheduleService.endDaySchedule(deputyDeanId, dayScheduleId))
+                .flatMap(userId -> dayScheduleService.endDaySchedule(userId, dayScheduleId))
                 .map(dayScheduleMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }
 
     @GetMapping("/day_schedule/active")
-    public Flux<DayScheduleDto> getAllActiveDaySchedule(
-            @RequestParam Long chatId,
-            @RequestParam UUID deputyDeanId) {
+    public Flux<DayScheduleDto> getAllDaySchedule(@RequestParam Long chatId) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMapMany(userId -> dayScheduleService.getAllActiveDaySchedule(deputyDeanId))
+                .flatMapMany(dayScheduleService::getDaySchedulesByUserId)
                 .map(dayScheduleMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }
 
-    @GetMapping("/day_schedule/canceled")
-    public Flux<DayScheduleDto> getAllCanceledDaySchedule(
+    @DeleteMapping("/day_schedule")
+    public Mono<String> deleteDaySchedule(
             @RequestParam Long chatId,
-            @RequestParam UUID deputyDeanId) {
+            @RequestParam UUID dayScheduleId) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMapMany(userId -> dayScheduleService.getAllCanceledDaySchedule(deputyDeanId))
-                .map(dayScheduleMapper::toDto)
+                .flatMap(userId -> dayScheduleService.deleteDaySchedule(userId, dayScheduleId))
                 .switchIfEmpty(Mono.error(authError()));
     }
 

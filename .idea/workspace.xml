@@ -4,34 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2dbc857-f7af-4fea-82b9-c264271bf863" name="Changes" comment="fiftieth commit">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/AuthenticationController.java" afterDir="false" />
+    <list default="true" id="b2dbc857-f7af-4fea-82b9-c264271bf863" name="Changes" comment="11 commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/DeputyDeanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/DeputyDeanController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/dtos/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/dtos/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/models/AuthenticationInfoEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/models/AuthenticationInfoEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/mappers/DayScheduleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/mappers/DayScheduleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/mappers/DeputyDeanMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/mappers/DeputyDeanMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/mappers/PetitionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/mappers/PetitionMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/mappers/StudentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/mappers/StudentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/mappers/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/mappers/UserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/models/MailApproveEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/models/MailApproveEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/models/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/models/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/AuthenticationInfoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/AuthenticationInfoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/AuthenticationRedisRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/PetitionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/PetitionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/UserCacheRedisRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/DeputyDeanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/DeputyDeanService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/MailApproveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/MailApproveService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/PetitionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/PetitionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/UserAuthenticationService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/AuthenticationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/AuthenticationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/DeputyDeanServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/DeputyDeanServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/MailApproveServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/MailApproveServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/PetitionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/PetitionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/StudentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/UserAuthenticationServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/DayScheduleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/DayScheduleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/DayScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/DayScheduleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/DayScheduleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/DayScheduleServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,6 +149,23 @@
       <updated>1743688515694</updated>
       <workItem from="1743688517873" duration="12505000" />
     </task>
+    <task id="LOCAL-00001" summary="10 commit">
+      <option name="closed" value="true" />
+      <created>1743978305500</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1743978305500</updated>
+    </task>
+    <task id="LOCAL-00002" summary="11 commit">
+      <option name="closed" value="true" />
+      <created>1743978351886</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1743978351886</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,6 +185,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fiftieth commit" />
     <MESSAGE value="eighth commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="eighth commit" />
+    <MESSAGE value="10 commit" />
+    <MESSAGE value="11 commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="11 commit" />
   </component>
 </project>

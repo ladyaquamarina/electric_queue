@@ -22,6 +22,7 @@ public interface PetitionMapper {
     @Mapping(target = "student", ignore = true)
     @Mapping(target = "deputyDean", ignore = true)
     @Mapping(target = "daySchedule", ignore = true)
+    @Mapping(target = "new", ignore = true)
     PetitionEntity toEntity(PetitionDto dto);
 
     @Mapping(source = "purpose", target = "purpose", qualifiedByName = "purposeEntityToDto")
