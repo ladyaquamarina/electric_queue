@@ -21,6 +21,8 @@ public class StudentEntity implements Persistable<UUID> {
     private UUID userId;
     @Column("group")
     private String group;
+    @Column("faculty")
+    private String faculty;
     @Column("course")
     private Integer course;
 

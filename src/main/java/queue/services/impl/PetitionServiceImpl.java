@@ -48,7 +48,9 @@ public class PetitionServiceImpl implements PetitionService {
 
     @Override
     public Mono<PetitionEntity> cancelPetition(UUID userId, UUID petitionId) {
-        return petitionRepository.findById(petitionId)
+        return studentService.getByUserId(userId)
+                .map(StudentEntity::getId)
+                .flatMap(studentId -> petitionRepository.findById(petitionId))
                 .map(petition -> {
                     petition.setStatus(PetitionStatus.CANCELLED);
                     return petition;
@@ -57,14 +59,10 @@ public class PetitionServiceImpl implements PetitionService {
     }
 
     @Override
-    public Flux<PetitionEntity> getAllActivePetitions(UUID dayScheduleId) {
-        return petitionRepository.findAllByDayScheduleId(dayScheduleId)
-                .filter(petition -> petition.);
-    }
-
-    @Override
     public Mono<PetitionEntity> completePetition(UUID userId, UUID petitionId) {
-        return petitionRepository.findById(petitionId)
+        return deputyDeanService.getByUserId(userId)
+                .map(DeputyDeanEntity::getId)
+                .flatMap(deputyDeanId -> petitionRepository.findById(petitionId))
                 .map(petition  -> {
                     petition.setStatus(PetitionStatus.PROCESSED);
                     petition.setEndedAt(LocalDateTime.now());
@@ -74,14 +72,32 @@ public class PetitionServiceImpl implements PetitionService {
     }
 
     @Override
+    public Mono<Long> getNumberInQueue(UUID userId, UUID dayScheduleId) {
+        return studentService.getByUserId(userId)
+                .map(StudentEntity::getId)
+                .flatMapMany(studentId -> getWaitingStudentInQueueBeforeThisStudent(studentId, dayScheduleId))
+                .count();
+    }
+
+    @Override
+    public Flux<PetitionEntity> getAllActivePetitions(UUID dayScheduleId) {
+        return petitionRepository.findAllByDayScheduleIdAndStatus(dayScheduleId, PetitionStatus.WAITING);
+    }
+
+    @Override
     public Flux<PetitionEntity> cancelAllWaitingPetitions(UUID dayScheduleId) {
-        return petitionRepository.findAllByDayScheduleId(dayScheduleId)
-                .filter(petition -> petition.getStatus() == PetitionStatus.WAITING)
+        return petitionRepository.findAllByDayScheduleIdAndStatus(dayScheduleId, PetitionStatus.WAITING)
                 .map(petition -> {
                     petition.setStatus(PetitionStatus.NOT_PROCESSED);
                     return petition;
                 })
                 .flatMap(petitionRepository::save);
+    }
+
+    private Flux<PetitionEntity> getWaitingStudentInQueueBeforeThisStudent(UUID studentId, UUID dayScheduleId) {
+        return petitionRepository.findByStudentIdAndDayScheduleIdAndStatus(studentId, dayScheduleId, PetitionStatus.WAITING)
+                .flatMapMany(petitionOfThisStudent -> petitionRepository.findAllByDayScheduleIdAndStatus(dayScheduleId, PetitionStatus.WAITING)
+                        .filter(petition -> petition.getCreatedAt().getNano() < petitionOfThisStudent.getCreatedAt().getNano()));
     }
 
     private PetitionEntity createWaitingPetition(PetitionDto dto, UUID studentId) {

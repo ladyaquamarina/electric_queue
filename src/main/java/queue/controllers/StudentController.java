@@ -79,13 +79,13 @@ public class StudentController {
                 .switchIfEmpty(Mono.error(authError()));
     }
 
-//    @GetMapping("/petition/all")
-//    public Flux<PetitionDto> getAllActivePetitions(@RequestParam Long chatId) {
-//        return authenticationService.getUserIdByChatId(chatId)
-//                .flatMapMany(petitionService::getAllActivePetitions)
-//                .map(petitionMapper::toDto)
-//                .switchIfEmpty(Mono.error(authError()));
-//    }
+    @GetMapping("/number_in_queue")
+    public Mono<Long> getNumberInQueue(@RequestParam Long chatId,
+                                       @RequestParam UUID dayScheduleId) {
+        return authenticationService.getUserIdByChatId(chatId)
+                .flatMap(userId -> petitionService.getNumberInQueue(userId, dayScheduleId))
+                .switchIfEmpty(Mono.error(authError()));
+    }
 
     @GetMapping("/day_schedule/{deputyDeanId}")
     public Flux<DayScheduleDto> getDaySchedules(
