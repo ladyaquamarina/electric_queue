@@ -64,7 +64,7 @@ public class DayScheduleServiceImpl implements DayScheduleService {
                             daySchedule.setStartAtFact(LocalDateTime.now());
                             return daySchedule;
                         })
-                        .flatMap(dayScheduleRepository::save));
+                        .flatMap(dayScheduleRepository::save)); // TODO: добавить обработку следующего обращения
     }
 
     @Override
@@ -76,7 +76,7 @@ public class DayScheduleServiceImpl implements DayScheduleService {
                             daySchedule.setEndAtFact(LocalDateTime.now());
                             return daySchedule;
                         })
-                        .flatMap(dayScheduleRepository::save));
+                        .flatMap(dayScheduleRepository::save)); // TODO: добавить обработку следующих обращений
     }
 
     @Override

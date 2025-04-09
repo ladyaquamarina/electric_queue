@@ -16,6 +16,7 @@ import queue.services.StudentService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -33,7 +34,7 @@ public class PetitionServiceImpl implements PetitionService {
     public Mono<PetitionEntity> createPetitionByStudent(UUID userId, PetitionDto dto) {
         return studentService.getByUserId(userId)
                 .map(StudentEntity::getId)
-                .map(studentId -> createPetition(dto, studentId, null))
+                .map(studentId -> createWaitingPetition(dto, studentId))
                 .flatMap(petitionRepository::save); // TODO: прикрутить добавление в очередь
     }
 
@@ -41,7 +42,7 @@ public class PetitionServiceImpl implements PetitionService {
     public Mono<PetitionEntity> createPetitionByDeputyDean(UUID userId, PetitionDto dto) {
         return deputyDeanService.getByUserId(userId)
                 .map(DeputyDeanEntity::getId)
-                .map(deputyDeanId -> createPetition(dto, null, deputyDeanId))
+                .map(deputyDeanId -> createProcessedPetition(dto, deputyDeanId))
                 .flatMap(petitionRepository::save);
     }
 
@@ -52,14 +53,13 @@ public class PetitionServiceImpl implements PetitionService {
                     petition.setStatus(PetitionStatus.CANCELLED);
                     return petition;
                 })
-                .flatMap(petitionRepository::save);
+                .flatMap(petitionRepository::save); // TODO: прикрутить исключение из очереди
     }
 
     @Override
-    public Flux<PetitionEntity> getAllActivePetitions(UUID userId) {
-        return studentService.getByUserId(userId)
-                .map(StudentEntity::getId)
-                .flatMapMany(petitionRepository::findAllByStudentId);
+    public Flux<PetitionEntity> getAllActivePetitions(UUID dayScheduleId) {
+        return petitionRepository.findAllByDayScheduleId(dayScheduleId)
+                .filter(petition -> petition.);
     }
 
     @Override
@@ -67,9 +67,34 @@ public class PetitionServiceImpl implements PetitionService {
         return petitionRepository.findById(petitionId)
                 .map(petition  -> {
                     petition.setStatus(PetitionStatus.PROCESSED);
+                    petition.setEndedAt(LocalDateTime.now());
+                    return petition;
+                })
+                .flatMap(petitionRepository::save); // TODO: прикрутить исключение из очереди (сдвиг очереди)
+    }
+
+    @Override
+    public Flux<PetitionEntity> cancelAllWaitingPetitions(UUID dayScheduleId) {
+        return petitionRepository.findAllByDayScheduleId(dayScheduleId)
+                .filter(petition -> petition.getStatus() == PetitionStatus.WAITING)
+                .map(petition -> {
+                    petition.setStatus(PetitionStatus.NOT_PROCESSED);
                     return petition;
                 })
                 .flatMap(petitionRepository::save);
+    }
+
+    private PetitionEntity createWaitingPetition(PetitionDto dto, UUID studentId) {
+        PetitionEntity entity = createPetition(dto, studentId, null);
+        entity.setStatus(PetitionStatus.WAITING);
+        return entity;
+    }
+
+    private PetitionEntity createProcessedPetition(PetitionDto dto, UUID deputyDeanId) {
+        PetitionEntity entity = createPetition(dto, null, deputyDeanId);
+        entity.setStatus(PetitionStatus.PROCESSED);
+        entity.setEndedAt(LocalDateTime.now());
+        return entity;
     }
 
     private PetitionEntity createPetition(PetitionDto dto, UUID studentId, UUID deputyDeanId) {
@@ -81,6 +106,7 @@ public class PetitionServiceImpl implements PetitionService {
         if (deputyDeanId != null) {
             entity.setDeputyDeanId(deputyDeanId);
         }
+        entity.setCreatedAt(LocalDateTime.now());
         entity.setNew(true);
         return entity;
     }

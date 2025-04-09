@@ -16,7 +16,12 @@ public interface PetitionService {
 
     Mono<PetitionEntity> cancelPetition(UUID userId, UUID petitionId);
 
-    Flux<PetitionEntity> getAllActivePetitions(UUID userId);
-
     Mono<PetitionEntity> completePetition(UUID userId, UUID petitionId);
+
+    Mono<Integer> getNumberInQueue(UUID userId);
+
+
+    Flux<PetitionEntity> getAllActivePetitions(UUID dayScheduleId);
+
+    Flux<PetitionEntity> cancelAllWaitingPetitions(UUID dayScheduleId);
 }

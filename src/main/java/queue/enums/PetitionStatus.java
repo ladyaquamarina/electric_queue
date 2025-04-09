@@ -9,7 +9,8 @@ public enum PetitionStatus {
     WAITING("В ожидании обработки"),
     IN_PROCESSING("В обработке"),
     PROCESSED("Обработано"),
-    CANCELLED("Отменено");
+    CANCELLED("Отменено"),
+    NOT_PROCESSED("Не обработано");
 
     private final String value;
 }

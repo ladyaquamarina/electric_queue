@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface PetitionRepository extends R2dbcRepository<PetitionEntity, UUID> {
     Flux<PetitionEntity> findAllByStudentId(UUID studentId);
+    Flux<PetitionEntity> findAllByDayScheduleId(UUID dayScheduleId);
 }

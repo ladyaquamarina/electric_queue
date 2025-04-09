@@ -4,19 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2dbc857-f7af-4fea-82b9-c264271bf863" name="Changes" comment="11 commit">
+    <list default="true" id="b2dbc857-f7af-4fea-82b9-c264271bf863" name="Changes" comment="fiftieth commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/DeputyDeanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/DeputyDeanController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/mappers/DayScheduleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/mappers/DayScheduleMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/mappers/DeputyDeanMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/mappers/DeputyDeanMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/mappers/PetitionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/mappers/PetitionMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/mappers/StudentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/mappers/StudentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/mappers/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/mappers/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/models/MailApproveEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/models/MailApproveEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/DayScheduleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/DayScheduleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/DayScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/DayScheduleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/enums/PetitionStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/enums/PetitionStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/PetitionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/PetitionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/PetitionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/PetitionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/QueueService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/QueueService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/DayScheduleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/DayScheduleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/PetitionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/PetitionServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,31 +43,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.docker-compose.yaml.db: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yaml.kafka: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yaml.redis: Compose Deployment.executor": "Run",
-    "Maven.electron_queue [clean].executor": "Run",
-    "Maven.electron_queue [compile].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.ElectricQueueApplication.executor": "Run",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/ucheba/proectirovanie/notificator",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.runner",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.docker-compose.yaml.db: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yaml.kafka: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yaml.redis: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.electron_queue [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.electron_queue [compile].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ElectricQueueApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ucheba/proectirovanie/notificator&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean" />
@@ -149,23 +145,6 @@
       <updated>1743688515694</updated>
       <workItem from="1743688517873" duration="12505000" />
     </task>
-    <task id="LOCAL-00001" summary="10 commit">
-      <option name="closed" value="true" />
-      <created>1743978305500</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1743978305500</updated>
-    </task>
-    <task id="LOCAL-00002" summary="11 commit">
-      <option name="closed" value="true" />
-      <created>1743978351886</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1743978351886</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,8 +164,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fiftieth commit" />
     <MESSAGE value="eighth commit" />
-    <MESSAGE value="10 commit" />
-    <MESSAGE value="11 commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="11 commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="eighth commit" />
   </component>
 </project>
