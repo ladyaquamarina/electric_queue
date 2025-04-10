@@ -18,8 +18,8 @@ public interface PetitionService {
 
     Mono<PetitionEntity> completePetition(UUID userId, UUID petitionId);
 
-    Mono<Long> getNumberInQueue(UUID userId, UUID dayScheduleId);
 
+    Mono<Long> getNumberInQueue(UUID userId, UUID dayScheduleId);
 
     Flux<PetitionEntity> getAllActivePetitions(UUID dayScheduleId);
 

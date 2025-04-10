@@ -32,9 +32,9 @@ public class PetitionServiceImpl implements PetitionService {
 
     @Override
     public Mono<PetitionEntity> createPetitionByStudent(UUID userId, PetitionDto dto) {
+        // postgresql партиции https://habr.com/ru/articles/273933/
         return studentService.getByUserId(userId)
-                .map(StudentEntity::getId)
-                .map(studentId -> createWaitingPetition(dto, studentId))
+                .map(student -> createWaitingPetition(dto, student.getId()))
                 .flatMap(petitionRepository::save); // TODO: прикрутить добавление в очередь
     }
 
