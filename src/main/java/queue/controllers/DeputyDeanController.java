@@ -34,7 +34,7 @@ public class DeputyDeanController {
     private final DeputyDeanService deputyDeanService;
     private final DayScheduleService dayScheduleService;
     private final QueueService queueService;
-    private final PetitionService petitionService;
+
     private final AuthenticationService authenticationService;
 
     private final PetitionMapper petitionMapper;
@@ -119,18 +119,18 @@ public class DeputyDeanController {
             @RequestParam Long chatId,
             @RequestBody PetitionDto dto) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMap(userId -> petitionService.createPetitionByDeputyDean(userId, dto))
+                .flatMap(userId -> queueService.addPetitionBypassingQueue(userId, dto))
                 .map(petitionMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }
 
     //возвращает следующее в очереди обращение
     @PostMapping("/petition/complete")
-    public Mono<PetitionDto> completePetition(
+    public Mono<PetitionDto> completeAndGetNextPetition(
             @RequestParam Long chatId,
             @RequestParam UUID petitionId) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMap(userId -> petitionService.completePetition(userId, petitionId))
+                .flatMap(userId -> queueService.completeAndGetNextPetition(userId, petitionId))
                 .map(petitionMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }

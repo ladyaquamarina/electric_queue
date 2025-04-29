@@ -10,6 +10,7 @@ import queue.models.UserEntity;
 import queue.repositories.DeputyDeanRepository;
 import queue.services.DeputyDeanService;
 import queue.services.UserService;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
@@ -42,6 +43,11 @@ public class DeputyDeanServiceImpl implements DeputyDeanService {
     @Override
     public Mono<DeputyDeanEntity> getByUserId(UUID userId) {
         return deputyDeanRepository.findByUserId(userId);
+    }
+
+    @Override
+    public Flux<DeputyDeanEntity> getAllDeputyDeans() {
+        return deputyDeanRepository.findAll();
     }
 
     private Mono<DeputyDeanEntity> updateDeputyDeanEntity(DeputyDeanDto newDto, DeputyDeanEntity oldEntity) {

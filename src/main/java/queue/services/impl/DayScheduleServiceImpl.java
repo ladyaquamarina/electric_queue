@@ -12,7 +12,8 @@ import queue.services.DeputyDeanService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.UUID;
 
 import static queue.utils.Utils.SUCCESS;
@@ -61,7 +62,7 @@ public class DayScheduleServiceImpl implements DayScheduleService {
                 .map(DeputyDeanEntity::getId)
                 .flatMap(deputyDeanId -> dayScheduleRepository.findById(dayScheduleId)
                         .map(daySchedule ->{
-                            daySchedule.setStartAtFact(LocalDateTime.now());
+                            daySchedule.setStartAtFact(LocalTime.now());
                             return daySchedule;
                         })
                         .flatMap(dayScheduleRepository::save)); // TODO: добавить обработку следующего обращения
@@ -73,7 +74,7 @@ public class DayScheduleServiceImpl implements DayScheduleService {
                 .map(DeputyDeanEntity::getId)
                 .flatMap(deputyDeanId -> dayScheduleRepository.findById(dayScheduleId)
                         .map(daySchedule ->{
-                            daySchedule.setEndAtFact(LocalDateTime.now());
+                            daySchedule.setEndAtFact(LocalTime.now());
                             return daySchedule;
                         })
                         .flatMap(dayScheduleRepository::save)); // TODO: добавить обработку следующих обращений
@@ -85,6 +86,11 @@ public class DayScheduleServiceImpl implements DayScheduleService {
                 .map(DeputyDeanEntity::getId)
                 .flatMap(deputyDeanId -> dayScheduleRepository.deleteById(dayScheduleId)
                         .then(Mono.just(SUCCESS)));
+    }
+
+    @Override
+    public Flux<DayScheduleEntity> getFromTimeInterval(LocalDate start, LocalDate end, UUID deputyDeanId) {
+        return dayScheduleRepository.findAllByDeputyDeanIdAndDateBetween(deputyDeanId, start, end);
     }
 
     private DayScheduleEntity createDateSchedule(DayScheduleDto dto, UUID deputyDeanId) {

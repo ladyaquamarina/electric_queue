@@ -7,21 +7,21 @@ import queue.models.PetitionEntity;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public interface PetitionService {
-    Mono<PetitionEntity> createPetitionByStudent(UUID userId, PetitionDto dto);
+    // используется студентами
+    Mono<PetitionEntity> createPetitionByStudent(UUID studentId, PetitionDto dto);
+    Mono<PetitionEntity> cancelPetition(UUID petitionId);
 
-    Mono<PetitionEntity> createPetitionByDeputyDean(UUID userId, PetitionDto dto);
+    //  используется замдеками
+    Mono<PetitionEntity> createPetitionByDeputyDean(UUID deputyDeanId, PetitionDto dto);
+    Mono<PetitionEntity> completePetition(UUID petitionId);
 
-    Mono<PetitionEntity> cancelPetition(UUID userId, UUID petitionId);
-
-    Mono<PetitionEntity> completePetition(UUID userId, UUID petitionId);
-
-
-    Mono<Long> getNumberInQueue(UUID userId, UUID dayScheduleId);
-
+    // прочее вспомогательное
+    Flux<PetitionEntity> getWaitingStudentInQueueBeforeThisStudent(UUID studentId, UUID dayScheduleId);
+    Mono<PetitionEntity> getFirstWaitingPetitionAfterTimestamp(LocalDateTime timestamp, UUID dayScheduleId);
     Flux<PetitionEntity> getAllActivePetitions(UUID dayScheduleId);
-
     Flux<PetitionEntity> cancelAllWaitingPetitions(UUID dayScheduleId);
 }

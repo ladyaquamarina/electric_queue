@@ -18,6 +18,7 @@ import queue.mappers.StudentMapper;
 import queue.services.AuthenticationService;
 import queue.services.DayScheduleService;
 import queue.services.PetitionService;
+import queue.services.QueueService;
 import queue.services.StudentService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -33,7 +34,8 @@ import static queue.utils.Utils.authError;
 public class StudentController {
     private final StudentService studentService;
     private final DayScheduleService dayScheduleService;
-    private final PetitionService petitionService;
+    private final QueueService queueService;
+
     private final AuthenticationService authenticationService;
 
     private final PetitionMapper petitionMapper;
@@ -64,7 +66,7 @@ public class StudentController {
             @RequestParam Long chatId,
             @RequestBody PetitionDto dto) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMap(userId -> petitionService.createPetitionByStudent(userId, dto))
+                .flatMap(userId -> queueService.addToQueue(userId, dto))
                 .map(petitionMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }
@@ -74,7 +76,7 @@ public class StudentController {
             @RequestParam Long chatId,
             @RequestParam UUID petitionId) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMap(userId -> petitionService.cancelPetition(userId, petitionId))
+                .flatMap(userId ->queueService.removeFromQueue(userId, petitionId))
                 .map(petition -> SUCCESS)
                 .switchIfEmpty(Mono.error(authError()));
     }
@@ -83,7 +85,7 @@ public class StudentController {
     public Mono<Long> getNumberInQueue(@RequestParam Long chatId,
                                        @RequestParam UUID dayScheduleId) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMap(userId -> petitionService.getNumberInQueue(userId, dayScheduleId))
+                .flatMap(userId -> queueService.getNumberInQueue(userId, dayScheduleId))
                 .switchIfEmpty(Mono.error(authError()));
     }
 

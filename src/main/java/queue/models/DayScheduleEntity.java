@@ -9,7 +9,9 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 import queue.enums.PetitionPurpose;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.UUID;
 
 
@@ -23,17 +25,17 @@ public class DayScheduleEntity implements Persistable<UUID> {
     @Column("deputy_dean_id")
     private UUID deputyDeanId;
     @Column("date")
-    private LocalDateTime date;
+    private LocalDate date;
     @Column("start_at_plan")
-    private LocalDateTime startAtPlan;
+    private LocalTime startAtPlan;
     @Column("end_at_plan")
-    private LocalDateTime endAtPlan;
+    private LocalTime endAtPlan;
     @Column("number_of_student_plan")
     private Integer numberOfStudentPlan;
     @Column("start_at_fact")
-    private LocalDateTime startAtFact;
+    private LocalTime startAtFact;
     @Column("endAtFact")
-    private LocalDateTime endAtFact;
+    private LocalTime endAtFact;
     @Column("number_of_student_fact")
     private Integer numberOfStudentFact;
     @Column("purpose")
