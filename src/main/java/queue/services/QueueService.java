@@ -1,12 +1,14 @@
 package queue.services;
 
 import queue.dtos.PetitionDto;
+import queue.enums.NumberOfPeopleType;
 import queue.enums.PetitionPurpose;
+import queue.models.DayScheduleEntity;
 import queue.models.PetitionEntity;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
+import java.util.LinkedHashMap;
 import java.util.UUID;
 
 public interface QueueService {
@@ -18,5 +20,5 @@ public interface QueueService {
 
 
     // выбирает три наименее людных дня для посещения замдекана в заданном промежутке времени
-    Flux<DayScheduleService> predict3BestDayForVisit(PetitionPurpose purpose, UUID deputyDeanId, LocalDate start, LocalDate end);
+    Mono<LinkedHashMap<DayScheduleEntity, NumberOfPeopleType>> predict3BestDayForVisit(PetitionPurpose purpose, UUID deputyDeanId, LocalDate start, LocalDate end);
 }
