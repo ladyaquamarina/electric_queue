@@ -57,27 +57,23 @@ public class DayScheduleServiceImpl implements DayScheduleService {
     }
 
     @Override
-    public Mono<DayScheduleEntity> startDaySchedule(UUID userId, UUID dayScheduleId) {
-        return deputyDeanService.getByUserId(userId)
-                .map(DeputyDeanEntity::getId)
-                .flatMap(deputyDeanId -> dayScheduleRepository.findById(dayScheduleId)
-                        .map(daySchedule ->{
-                            daySchedule.setStartAtFact(LocalTime.now());
-                            return daySchedule;
-                        })
-                        .flatMap(dayScheduleRepository::save)); // TODO: добавить обработку следующего обращения
+    public Mono<DayScheduleEntity> startDaySchedule(UUID dayScheduleId) {
+        return dayScheduleRepository.findById(dayScheduleId)
+                .map(daySchedule ->{
+                    daySchedule.setStartAtFact(LocalTime.now());
+                    return daySchedule;
+                })
+                .flatMap(dayScheduleRepository::save);
     }
 
     @Override
-    public Mono<DayScheduleEntity> endDaySchedule(UUID userId, UUID dayScheduleId) {
-        return deputyDeanService.getByUserId(userId)
-                .map(DeputyDeanEntity::getId)
-                .flatMap(deputyDeanId -> dayScheduleRepository.findById(dayScheduleId)
-                        .map(daySchedule ->{
-                            daySchedule.setEndAtFact(LocalTime.now());
-                            return daySchedule;
-                        })
-                        .flatMap(dayScheduleRepository::save)); // TODO: добавить обработку следующих обращений
+    public Mono<DayScheduleEntity> endDaySchedule(UUID dayScheduleId) {
+        return dayScheduleRepository.findById(dayScheduleId)
+                .map(daySchedule ->{
+                    daySchedule.setEndAtFact(LocalTime.now());
+                    return daySchedule;
+                })
+                .flatMap(dayScheduleRepository::save);
     }
 
     @Override
@@ -91,6 +87,11 @@ public class DayScheduleServiceImpl implements DayScheduleService {
     @Override
     public Flux<DayScheduleEntity> getFromTimeInterval(LocalDate start, LocalDate end, UUID deputyDeanId) {
         return dayScheduleRepository.findAllByDeputyDeanIdAndDateBetween(deputyDeanId, start, end);
+    }
+
+    @Override
+    public Mono<DayScheduleEntity> getById(UUID dayScheduleId) {
+        return dayScheduleRepository.findById(dayScheduleId);
     }
 
     private DayScheduleEntity createDateSchedule(DayScheduleDto dto, UUID deputyDeanId) {

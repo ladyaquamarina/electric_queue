@@ -16,6 +16,7 @@ import queue.services.StudentService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -70,6 +71,17 @@ public class PetitionServiceImpl implements PetitionService {
     }
 
     @Override
+    public Mono<PetitionEntity> getFirstWaitingPetition(UUID dayScheduleId) {
+        return petitionRepository.findFirstByDayScheduleIdAndStatusOrderByCreatedAtAsc(dayScheduleId, PetitionStatus.WAITING)
+                .map(petition -> {
+                    petition.setStartedAt(LocalDateTime.now());
+                    petition.setStatus(PetitionStatus.IN_PROCESSING);
+                    return petition;
+                })
+                .flatMap(petitionRepository::save);
+    }
+
+    @Override
     public Flux<PetitionEntity> getAllActivePetitions(UUID dayScheduleId) {
         return petitionRepository.findAllByDayScheduleIdAndStatus(dayScheduleId, PetitionStatus.WAITING);
     }
@@ -82,6 +94,11 @@ public class PetitionServiceImpl implements PetitionService {
                     return petition;
                 })
                 .flatMap(petitionRepository::save);
+    }
+
+    @Override
+    public Flux<PetitionEntity> getAllByStartDateAndEndDate(LocalDate startDate, LocalDate endDate) {
+        return petitionRepository.findAllByCreatedAtPeriod(startDate, endDate);
     }
 
     private PetitionEntity createWaitingPetition(PetitionDto dto, UUID studentId) {

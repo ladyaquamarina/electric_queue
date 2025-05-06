@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import queue.dtos.DayScheduleDto;
 import queue.dtos.PetitionDto;
 import queue.dtos.StudentDto;
+import queue.enums.PetitionPurpose;
 import queue.mappers.DayScheduleMapper;
 import queue.mappers.PetitionMapper;
 import queue.mappers.StudentMapper;
@@ -23,6 +24,8 @@ import queue.services.StudentService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
+import java.util.LinkedHashMap;
 import java.util.UUID;
 
 import static queue.utils.Utils.SUCCESS;
@@ -76,7 +79,7 @@ public class StudentController {
             @RequestParam Long chatId,
             @RequestParam UUID petitionId) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMap(userId ->queueService.removeFromQueue(userId, petitionId))
+                .flatMap(userId -> queueService.removeFromQueue(userId, petitionId))
                 .map(petition -> SUCCESS)
                 .switchIfEmpty(Mono.error(authError()));
     }
@@ -97,5 +100,20 @@ public class StudentController {
                 .flatMapMany(userId -> dayScheduleService.getDaySchedulesByDeputyDean(deputyDeanId))
                 .map(dayScheduleMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
+    }
+
+    @GetMapping("/prediction")
+    public Mono<LinkedHashMap<DayScheduleDto, String>> predictBestDaysForVisit(
+            @RequestParam PetitionPurpose purpose,
+            @RequestParam UUID deputyDeanId,
+            @RequestParam LocalDate start,
+            @RequestParam LocalDate end) {
+        return queueService.predict3BestDayForVisit(purpose, deputyDeanId, start, end)
+                .map(list -> {
+                    LinkedHashMap<DayScheduleDto, String> resultMap = new LinkedHashMap<>();
+                    list.sequencedKeySet().iterator().forEachRemaining(dayScheduleEntity ->
+                            resultMap.put(dayScheduleMapper.toDto(dayScheduleEntity), list.get(dayScheduleEntity).getValue()));
+                    return resultMap;
+                });
     }
 }

@@ -25,6 +25,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
+import static queue.utils.Utils.SUCCESS;
 import static queue.utils.Utils.authError;
 
 @RestController
@@ -80,20 +81,21 @@ public class DeputyDeanController {
     }
 
     @PostMapping("/day_schedule/start")
-    public Mono<DayScheduleDto> startDaySchadule(@RequestParam Long chatId,
+    public Mono<PetitionDto> startDaySchedule(@RequestParam Long chatId,
                                                  @RequestParam UUID dayScheduleId) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMap(userId -> dayScheduleService.startDaySchedule(userId, dayScheduleId))
-                .map(dayScheduleMapper::toDto)
+                .flatMap(userId -> queueService.startQueue(userId, dayScheduleId))
+                .map(petitionMapper::toDto)
                 .switchIfEmpty(Mono.error(authError()));
     }
 
     @PostMapping("/day_schedule/end")
-    public Mono<DayScheduleDto> endDaySchedule(@RequestParam Long chatId,
+    public Mono<String> endDaySchedule(@RequestParam Long chatId,
                                                @RequestParam UUID dayScheduleId) {
         return authenticationService.getUserIdByChatId(chatId)
-                .flatMap(userId -> dayScheduleService.endDaySchedule(userId, dayScheduleId))
-                .map(dayScheduleMapper::toDto)
+                .flatMapMany(userId -> queueService.endQueue(userId, dayScheduleId))
+                .collectList()
+                .map(list -> SUCCESS)
                 .switchIfEmpty(Mono.error(authError()));
     }
 

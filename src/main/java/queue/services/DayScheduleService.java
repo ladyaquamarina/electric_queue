@@ -14,9 +14,10 @@ public interface DayScheduleService {
     Flux<DayScheduleEntity> getDaySchedulesByUserId(UUID userId);
     Flux<DayScheduleEntity> getDaySchedulesByDeputyDean(UUID deputyDeanId);
     Mono<DayScheduleEntity> updateDaySchedule(UUID userId, UUID dayScheduleId, DayScheduleDto dto);
-    Mono<DayScheduleEntity> startDaySchedule(UUID userId, UUID dayScheduleId);
-    Mono<DayScheduleEntity> endDaySchedule(UUID userId, UUID dayScheduleId);
+    Mono<DayScheduleEntity> startDaySchedule(UUID dayScheduleId);
+    Mono<DayScheduleEntity> endDaySchedule(UUID dayScheduleId);
     Mono<String> deleteDaySchedule(UUID userId, UUID dayScheduleId);
 
     Flux<DayScheduleEntity> getFromTimeInterval(LocalDate start, LocalDate end, UUID deputyDeanId);
+    Mono<DayScheduleEntity> getById(UUID dayScheduleId);
 }

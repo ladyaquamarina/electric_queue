@@ -21,6 +21,7 @@ import queue.services.QueueService;
 import queue.services.StudentService;
 import queue.services.extra_info.StartTermInfoService;
 import queue.utils.TripleComparator;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.DayOfWeek;
@@ -33,6 +34,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -67,10 +69,11 @@ public class QueueServiceImpl implements QueueService {
 
     @Override
     public Mono<PetitionEntity> addToQueue(UUID userId, PetitionDto petitionDto) {
-        // postgresql партиции https://habr.com/ru/articles/273933/
         return studentService.getByUserId(userId)
                 .map(StudentEntity::getId)
-                .flatMap(studentId -> petitionService.createPetitionByStudent(studentId, petitionDto));
+                .flatMap(studentId -> dayScheduleService.getById(petitionDto.getDayScheduleId())
+                        .filter(daySchedule -> !Objects.equals(daySchedule.getDate(), LocalDate.now()))
+                        .flatMap(daySchedule -> petitionService.createPetitionByStudent(studentId, petitionDto)));
     }
 
     @Override
@@ -86,6 +89,22 @@ public class QueueServiceImpl implements QueueService {
                 .map(StudentEntity::getId)
                 .flatMapMany(studentId -> petitionService.getWaitingStudentInQueueBeforeThisStudent(studentId, dayScheduleId))
                 .count();
+    }
+
+    @Override
+    public Mono<PetitionEntity> startQueue(UUID userId, UUID dayScheduleId) {
+        return deputyDeanService.getByUserId(userId)
+                .map(DeputyDeanEntity::getId)
+                .flatMap(deputyDeanId -> dayScheduleService.startDaySchedule(dayScheduleId))
+                .flatMap(daySchedule -> petitionService.getFirstWaitingPetition(dayScheduleId));
+    }
+
+    @Override
+    public Flux<PetitionEntity> endQueue(UUID userId, UUID dayScheduleId) {
+        return deputyDeanService.getByUserId(userId)
+                .map(DeputyDeanEntity::getId)
+                .flatMap(deputyDeanId -> dayScheduleService.endDaySchedule(dayScheduleId))
+                .flatMapMany(daySchedule -> petitionService.cancelAllWaitingPetitions(daySchedule.getId()));
     }
 
     @Override

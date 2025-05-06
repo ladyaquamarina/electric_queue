@@ -4,21 +4,26 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import queue.dtos.ReportDto;
-import queue.services.impl.DayScheduleServiceImpl;
-import queue.services.impl.PetitionServiceImpl;
+import queue.services.AuthenticationService;
+import queue.services.ReportService;
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/report")
 public class ReportController {
-    private final PetitionServiceImpl petitionService;
-    private final DayScheduleServiceImpl dayScheduleService;
+    private final ReportService reportService;
+
+    private final AuthenticationService authenticationService;
 
     @GetMapping
-    public byte[] getReport(@RequestBody ReportDto dto) {
-        return null;
+    public Mono<byte[]> getReport(
+            @RequestParam Long chatId,
+            @RequestBody ReportDto dto) {
+        return authenticationService.getUserIdByChatId(chatId)
+                .flatMap(userId -> reportService.getReport(userId, dto));
     }
 }

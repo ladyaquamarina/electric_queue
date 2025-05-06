@@ -12,19 +12,6 @@ spring:
     user: postgres
     url: jdbc:postgresql://localhost:6432/electron_queue
 
-  kafka:
-    bootstrap-servers: localhost:29092
-    consumer:
-      group-id: electron_queue
-      properties:
-        name: consumer
-        password: consumer
-      max-poll-records: 1
-    producer:
-      properties:
-        name: producer
-        password: producer
-
   data:
     redis:
       host: localhost
