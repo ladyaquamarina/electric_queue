@@ -14,6 +14,7 @@ public class StudentDto {
     private UUID userId;
     private String group;
     private Integer course;
+    private String faculty;
 
     private UserDto user;
 }

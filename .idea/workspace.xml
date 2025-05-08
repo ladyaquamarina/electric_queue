@@ -4,24 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2dbc857-f7af-4fea-82b9-c264271bf863" name="Changes" comment="18 commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/queue/services/ReportService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/ReportServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/migrations/V1__create_tables.sql" afterDir="false" />
+    <list default="true" id="b2dbc857-f7af-4fea-82b9-c264271bf863" name="Changes" comment="19 commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/DeputyDeanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/DeputyDeanController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/controllers/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/controllers/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/dtos/ReportDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/dtos/ReportDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/enums/NumberOfPeopleType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/enums/NumberOfPeopleType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/dtos/DayScheduleDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/dtos/DayScheduleDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/dtos/StudentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/dtos/StudentDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/mappers/StudentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/mappers/StudentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/models/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/models/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/DayScheduleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/DayScheduleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/DeputyDeanRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/DeputyDeanRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/PetitionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/PetitionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/StudentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/repositories/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/DayScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/DayScheduleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/DeputyDeanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/DeputyDeanService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/PetitionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/PetitionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/QueueService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/QueueService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/DayScheduleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/DayScheduleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/DeputyDeanServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/DeputyDeanServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/PetitionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/PetitionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/QueueServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/QueueServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/ReportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/ReportServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/StudentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/queue/services/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/queue/services/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/migrations/V1__create_tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/migrations/V1__create_tables.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,32 +61,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.docker-compose.yaml.db: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yaml.kafka: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yaml.redis: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.electron_queue [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.electron_queue [compile].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ElectricQueueApplication.executor&quot;: &quot;Run&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/ucheba/vkrb/electron_queue/src/main/java/queue&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.docker-compose.yaml.db: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yaml.kafka: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yaml.redis: Compose Deployment.executor": "Run",
+    "Maven.electron_queue [clean].executor": "Run",
+    "Maven.electron_queue [compile].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.ElectricQueueApplication.executor": "Run",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/ucheba/vkrb/electron_queue/src/main/java/queue",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.runner",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ],
+    "RunConfigurationTargetLRU": [
+      "18a8ac62-3c33-48ff-bdf0-8f2c4bd97613"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ucheba\vkrb\electron_queue\src\main\java\queue" />
@@ -91,7 +107,13 @@
       <command value="mvn clean install" />
     </option>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yaml.db: Compose Deployment">
+  <component name="RunManager" selected="Spring Boot.ElectricQueueApplication">
+    <configuration name="V1__create_tables.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/src/main/resources/migrations/V1__create_tables.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="18a8ac62-3c33-48ff-bdf0-8f2c4bd97613" />
+      <method v="2" />
+    </configuration>
     <configuration name="ElectricQueueApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="electron_queue" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="queue.ElectricQueueApplication" />
@@ -146,6 +168,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Database Script.V1__create_tables.sql" />
         <item itemvalue="Docker.docker-compose.yaml.db: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.redis: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.kafka: Compose Deployment" />
@@ -162,7 +185,7 @@
       <updated>1743688515694</updated>
       <workItem from="1743688517873" duration="12505000" />
       <workItem from="1745782587407" duration="21634000" />
-      <workItem from="1746202425997" duration="41770000" />
+      <workItem from="1746202425997" duration="60848000" />
     </task>
     <task id="LOCAL-00001" summary="18 commit">
       <option name="closed" value="true" />
@@ -172,7 +195,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746402377306</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="19 commit">
+      <option name="closed" value="true" />
+      <created>1746574705254</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1746574705254</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,6 +224,7 @@
     <MESSAGE value="fiftieth commit" />
     <MESSAGE value="eighth commit" />
     <MESSAGE value="18 commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="18 commit" />
+    <MESSAGE value="19 commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="19 commit" />
   </component>
 </project>

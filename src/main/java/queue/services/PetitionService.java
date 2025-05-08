@@ -1,8 +1,7 @@
 package queue.services;
 
+import queue.dtos.NameValueDto;
 import queue.dtos.PetitionDto;
-import queue.models.DayScheduleEntity;
-import queue.models.DeputyDeanEntity;
 import queue.models.PetitionEntity;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -25,5 +24,6 @@ public interface PetitionService {
     Flux<PetitionEntity> getAllActivePetitions(UUID dayScheduleId);
     Flux<PetitionEntity> cancelAllWaitingPetitions(UUID dayScheduleId);
 
-    Flux<PetitionEntity> getAllByStartDateAndEndDate(LocalDate defaultStartDate, LocalDate defaultEndDate);
+    Flux<PetitionEntity> getAllByStartDateAndEndDate(
+            LocalDate startDate, LocalDate endDate, UUID deputyDeanId, NameValueDto purpose);
 }

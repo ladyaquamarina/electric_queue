@@ -12,12 +12,12 @@ spring:
     user: postgres
     url: jdbc:postgresql://localhost:6432/electron_queue
 
-  data:
-    redis:
-      host: localhost
-      port: 6380
-      password: password
-      ssl: true
+#  data:
+#    redis:
+#      host: localhost
+#      port: 6380
+#      password: password
+#      ssl: true
 
   mail:
     host: smtp.gmail.com

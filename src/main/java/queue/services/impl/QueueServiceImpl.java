@@ -142,7 +142,7 @@ public class QueueServiceImpl implements QueueService {
         triples.forEach(triple -> {
             leastCrowdedDays.add(triple);
             if (leastCrowdedDays.size() > 3) {
-                leastCrowdedDays.removeLast();
+                leastCrowdedDays.remove(leastCrowdedDays.last());
             }
         });
         LinkedHashMap<DayScheduleEntity, NumberOfPeopleType> result = new LinkedHashMap<>();

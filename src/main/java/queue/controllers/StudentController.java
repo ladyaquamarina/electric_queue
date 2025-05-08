@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import queue.dtos.DayScheduleDto;
 import queue.dtos.PetitionDto;
 import queue.dtos.StudentDto;
+import queue.enums.NumberOfPeopleType;
 import queue.enums.PetitionPurpose;
 import queue.mappers.DayScheduleMapper;
 import queue.mappers.PetitionMapper;
 import queue.mappers.StudentMapper;
+import queue.models.DayScheduleEntity;
 import queue.services.AuthenticationService;
 import queue.services.DayScheduleService;
 import queue.services.PetitionService;
@@ -111,7 +113,7 @@ public class StudentController {
         return queueService.predict3BestDayForVisit(purpose, deputyDeanId, start, end)
                 .map(list -> {
                     LinkedHashMap<DayScheduleDto, String> resultMap = new LinkedHashMap<>();
-                    list.sequencedKeySet().iterator().forEachRemaining(dayScheduleEntity ->
+                    list.keySet().iterator().forEachRemaining(dayScheduleEntity ->
                             resultMap.put(dayScheduleMapper.toDto(dayScheduleEntity), list.get(dayScheduleEntity).getValue()));
                     return resultMap;
                 });

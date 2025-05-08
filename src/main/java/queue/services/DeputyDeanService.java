@@ -5,6 +5,8 @@ import queue.models.DeputyDeanEntity;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface DeputyDeanService {
@@ -13,4 +15,6 @@ public interface DeputyDeanService {
 
     Mono<DeputyDeanEntity> getByUserId(UUID userId);
     Flux<DeputyDeanEntity> getAllDeputyDeans();
+
+    Flux<DeputyDeanEntity> getByDeputyDeanIds(List<UUID> ids);
 }

@@ -2,17 +2,13 @@ package queue.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import queue.dtos.NameValueDto;
 import queue.dtos.PetitionDto;
 import queue.enums.PetitionStatus;
 import queue.mappers.PetitionMapper;
-import queue.models.DeputyDeanEntity;
 import queue.models.PetitionEntity;
-import queue.models.StudentEntity;
 import queue.repositories.PetitionRepository;
-import queue.services.DeputyDeanService;
 import queue.services.PetitionService;
-import queue.services.QueueService;
-import queue.services.StudentService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -66,8 +62,14 @@ public class PetitionServiceImpl implements PetitionService {
 
     @Override
     public Mono<PetitionEntity> getFirstWaitingPetitionAfterTimestamp(LocalDateTime timestamp, UUID dayScheduleId) {
-        return petitionRepository.findFirstByCreatedAtAndDayScheduleIdAndStatusOrderByCreatedAtAsc(
-                timestamp, dayScheduleId, PetitionStatus.WAITING);
+        return petitionRepository.findFirstByCreatedAtAndDayScheduleIdAndStatusOrderByCreatedAtAsc(timestamp,
+                        dayScheduleId, PetitionStatus.WAITING)
+                .map(petition -> {
+                    petition.setStartedAt(LocalDateTime.now());
+                    petition.setStatus(PetitionStatus.IN_PROCESSING);
+                    return petition;
+                })
+                .flatMap(petitionRepository::save);
     }
 
     @Override
@@ -97,8 +99,12 @@ public class PetitionServiceImpl implements PetitionService {
     }
 
     @Override
-    public Flux<PetitionEntity> getAllByStartDateAndEndDate(LocalDate startDate, LocalDate endDate) {
-        return petitionRepository.findAllByCreatedAtPeriod(startDate, endDate);
+    public Flux<PetitionEntity> getAllByStartDateAndEndDate(LocalDate startDate,
+                                                            LocalDate endDate,
+                                                            UUID deputyDeanId,
+                                                            NameValueDto purpose) {
+        return petitionRepository.findAllByCreatedAtPeriodAndDeputyDeanIdAndPurpose(
+                startDate, endDate, deputyDeanId, purpose == null ? null : purpose.getName());
     }
 
     private PetitionEntity createWaitingPetition(PetitionDto dto, UUID studentId) {

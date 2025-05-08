@@ -6,6 +6,7 @@ import queue.dtos.DeputyDeanDto;
 import queue.dtos.UserDto;
 import queue.mappers.DeputyDeanMapper;
 import queue.models.DeputyDeanEntity;
+import queue.models.StudentEntity;
 import queue.models.UserEntity;
 import queue.repositories.DeputyDeanRepository;
 import queue.services.DeputyDeanService;
@@ -13,6 +14,7 @@ import queue.services.UserService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -48,6 +50,29 @@ public class DeputyDeanServiceImpl implements DeputyDeanService {
     @Override
     public Flux<DeputyDeanEntity> getAllDeputyDeans() {
         return deputyDeanRepository.findAll();
+    }
+
+    @Override
+    public Flux<DeputyDeanEntity> getByDeputyDeanIds(List<UUID> ids) {
+        return deputyDeanRepository.findAllByIds(ids)
+                .collectList()
+                .flatMap(this::fillUserInDeputyDeanList)
+                .flatMapMany(Flux::fromIterable);
+    }
+
+    private Mono<List<DeputyDeanEntity>> fillUserInDeputyDeanList(List<DeputyDeanEntity> deputyDeans) {
+        return userService.getByIds(deputyDeans.stream().map(DeputyDeanEntity::getUserId).toList())
+                .map(user -> {
+                    for (DeputyDeanEntity deputyDean : deputyDeans){
+                        if (deputyDean.getUserId() == user.getId()) {
+                            deputyDean.setUser(user);
+                            break;
+                        }
+                    }
+                    return user;
+                })
+                .collectList()
+                .map(users -> deputyDeans);
     }
 
     private Mono<DeputyDeanEntity> updateDeputyDeanEntity(DeputyDeanDto newDto, DeputyDeanEntity oldEntity) {

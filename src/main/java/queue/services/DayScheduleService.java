@@ -6,6 +6,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface DayScheduleService {
@@ -20,4 +22,5 @@ public interface DayScheduleService {
 
     Flux<DayScheduleEntity> getFromTimeInterval(LocalDate start, LocalDate end, UUID deputyDeanId);
     Mono<DayScheduleEntity> getById(UUID dayScheduleId);
+    Flux<DayScheduleEntity> getByDayScheduleIds(List<UUID> ids);
 }

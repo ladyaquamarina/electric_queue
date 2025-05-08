@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.UUID;
 
 @Data
@@ -13,12 +15,12 @@ import java.util.UUID;
 public class DayScheduleDto {
     private UUID id;
     private UUID deputyDeanId;
-    private LocalDateTime date;
-    private LocalDateTime startAtPlan;
-    private LocalDateTime endAtPlan;
+    private LocalDate date;
+    private LocalTime startAtPlan;
+    private LocalTime endAtPlan;
     private Integer numberOfStudentPlan;
-    private LocalDateTime startAtFact;
-    private LocalDateTime endAtFact;
+    private LocalTime startAtFact;
+    private LocalTime endAtFact;
     private Integer numberOfStudentFact;
     private NameValueDto purpose;
 

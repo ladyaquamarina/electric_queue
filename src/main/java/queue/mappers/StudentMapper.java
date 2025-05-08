@@ -27,6 +27,7 @@ public interface StudentMapper {
     @Mapping(target = "userId", ignore = true)
     @Mapping(source = "group", target = "group", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
     @Mapping(source = "course", target = "course", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+    @Mapping(source = "faculty", target = "faculty", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "new", ignore = true)
     StudentEntity update(@MappingTarget StudentEntity entity, StudentDto dto);

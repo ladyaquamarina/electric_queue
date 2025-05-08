@@ -5,13 +5,16 @@ import org.springframework.stereotype.Service;
 import queue.dtos.StudentDto;
 import queue.dtos.UserDto;
 import queue.mappers.StudentMapper;
+import queue.models.PetitionEntity;
 import queue.models.StudentEntity;
 import queue.models.UserEntity;
 import queue.repositories.StudentRepository;
 import queue.services.StudentService;
 import queue.services.UserService;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -41,7 +44,39 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Mono<StudentEntity> getByUserId(UUID userId) {
-        return studentRepository.findByUserId(userId);
+        return studentRepository.findByUserId(userId)
+                .flatMap(this::fillUser);
+    }
+
+    @Override
+    public Flux<StudentEntity> getByStudentIds(List<UUID> studentIds) {
+        return studentRepository.findAllById(studentIds)
+                .collectList()
+                .flatMap(this::fillUserInStudentList)
+                .flatMapMany(Flux::fromIterable);
+    }
+
+    private Mono<List<StudentEntity>> fillUserInStudentList(List<StudentEntity> students) {
+        return userService.getByIds(students.stream().map(StudentEntity::getUserId).toList())
+                .map(user -> {
+                    for (StudentEntity student : students){
+                        if (student.getUserId() == user.getId()) {
+                            student.setUser(user);
+                            break;
+                        }
+                    }
+                    return user;
+                })
+                .collectList()
+                .map(users -> students);
+    }
+
+    private Mono<StudentEntity> fillUser(StudentEntity student) {
+        return userService.getById(student.getUserId())
+                .map(user -> {
+                    student.setUser(user);
+                    return student;
+                });
     }
 
     private Mono<StudentEntity> updateStudentEntity(StudentDto newDto, StudentEntity oldEntity) {

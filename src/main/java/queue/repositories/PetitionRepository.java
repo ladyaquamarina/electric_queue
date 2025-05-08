@@ -31,6 +31,12 @@ public interface PetitionRepository extends R2dbcRepository<PetitionEntity, UUID
         WHERE created_at >= :start
             AND created_at <= :end
             AND (status = 'PROCESSED' OR status = 'NOT_PROCESSED')
+            AND CASE WHEN :deputyDeanId = '' THEN 1 ELSE deputyDeanId = :deputyDeanId END
+            AND CASE WHEN :purpose = '' THEN 1 ELSE purpose = :purpose END
+        ORDER BY created_at ASC
         """)
-    Flux<PetitionEntity> findAllByCreatedAtPeriod(LocalDate start, LocalDate end);
+    Flux<PetitionEntity> findAllByCreatedAtPeriodAndDeputyDeanIdAndPurpose(
+            LocalDate start, LocalDate end,
+            UUID deputyDeanId,
+            String purpose);
 }

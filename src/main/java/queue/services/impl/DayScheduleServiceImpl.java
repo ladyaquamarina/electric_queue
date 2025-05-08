@@ -6,6 +6,7 @@ import queue.dtos.DayScheduleDto;
 import queue.mappers.DayScheduleMapper;
 import queue.models.DayScheduleEntity;
 import queue.models.DeputyDeanEntity;
+import queue.models.StudentEntity;
 import queue.repositories.DayScheduleRepository;
 import queue.services.DayScheduleService;
 import queue.services.DeputyDeanService;
@@ -14,6 +15,7 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.UUID;
 
 import static queue.utils.Utils.SUCCESS;
@@ -92,6 +94,29 @@ public class DayScheduleServiceImpl implements DayScheduleService {
     @Override
     public Mono<DayScheduleEntity> getById(UUID dayScheduleId) {
         return dayScheduleRepository.findById(dayScheduleId);
+    }
+
+    @Override
+    public Flux<DayScheduleEntity> getByDayScheduleIds(List<UUID> ids) {
+        return dayScheduleRepository.findAllByIds(ids)
+                .collectList()
+                .flatMap(this::fillDeputyDeanInScheduleList)
+                .flatMapMany(Flux::fromIterable);
+    }
+
+    private Mono<List<DayScheduleEntity>> fillDeputyDeanInScheduleList(List<DayScheduleEntity> daySchedules) {
+        return deputyDeanService.getByDeputyDeanIds(daySchedules.stream().map(DayScheduleEntity::getId).toList())
+                .map(deputyDean -> {
+                    for (DayScheduleEntity daySchedule : daySchedules){
+                        if (daySchedule.getDeputyDeanId() == deputyDean.getId()) {
+                            daySchedule.setDeputyDean(deputyDean);
+                            break;
+                        }
+                    }
+                    return deputyDean;
+                })
+                .collectList()
+                .map(users -> daySchedules);
     }
 
     private DayScheduleEntity createDateSchedule(DayScheduleDto dto, UUID deputyDeanId) {

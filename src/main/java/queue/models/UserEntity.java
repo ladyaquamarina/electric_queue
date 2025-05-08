@@ -13,7 +13,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("user")
+@Table("users")
 public class UserEntity implements Persistable<UUID> {
     @Column("id")
     private UUID id;    // соответствует AuthenticationInfo.userId

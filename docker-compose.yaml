@@ -27,7 +27,7 @@ services:
     environment:
       POSTGRES_HOST: "%"
       POSTGRES_ROOT_HOST: "%"
-      POSTGRES_DB: "electric_queue"
+      POSTGRES_DB: "electron_queue"
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
     ports:

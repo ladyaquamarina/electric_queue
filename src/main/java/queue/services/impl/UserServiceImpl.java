@@ -8,8 +8,10 @@ import queue.models.UserEntity;
 import queue.repositories.UserRepository;
 import queue.services.AuthenticationService;
 import queue.services.UserService;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -23,6 +25,16 @@ public class UserServiceImpl implements UserService {
     public Mono<UserEntity> createNewUser(UUID userId, UserDto dto) {
         UserEntity entity = createNewEntity(userId, dto);
         return userRepository.save(entity);
+    }
+
+    @Override
+    public Mono<UserEntity> getById(UUID id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public Flux<UserEntity> getByIds(List<UUID> ids) {
+        return userRepository.findAllById(ids);
     }
 
     @Override
