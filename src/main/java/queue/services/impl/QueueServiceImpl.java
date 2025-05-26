@@ -192,7 +192,7 @@ public class QueueServiceImpl implements QueueService {
         Map<EstimateTimeType, Double> estimateTimeTypeFuzz = pair.getValue().getRight();
         Pair<NumberOfPeopleType, Double>[] rules = new Pair[5];
 
-        // получить вероятность для каждого правила
+        // получить степень истинности посылки импликации для каждого правила
         rules[0] = Pair.of(NumberOfPeopleType.MANY, termPartFuzz.get(TermPartType.END));
         rules[1] = Pair.of(NumberOfPeopleType.FEW, Math.min(dayTimeFuzz.get(DayTimeType.MORNING), termPartFuzz.get(TermPartType.MIDDLE)));
         rules[2] = Pair.of(NumberOfPeopleType.NORMAL, Math.min(
@@ -205,7 +205,7 @@ public class QueueServiceImpl implements QueueService {
                 Math.min(estimateTimeTypeFuzz.get(EstimateTimeType.FAST), termPartFuzz.get(TermPartType.SESSION)),
                 Math.max(dayTimeFuzz.get(DayTimeType.AFTERNOON), dayTimeFuzz.get(DayTimeType.EVENING))));
 
-        // получить пару с наибольшим значением вероятности
+        // получить пару с наибольшим значением степени истинности
         Triple<NumberOfPeopleType, Double, Double> maxProbabilityResult = null;
         for (Pair<NumberOfPeopleType, Double> rule : rules) {
             if (rule.getValue() != 0) {
@@ -220,8 +220,7 @@ public class QueueServiceImpl implements QueueService {
         Pair<Double, Double> probabilityByZade = countByZade(rule.getValue());
 
         if (maxProbabilityResult == null ||
-                (maxProbabilityResult.getMiddle() != null &&
-                        Math.max(probabilityByZade.getLeft(), maxProbabilityResult.getMiddle()) == probabilityByZade.getLeft())) {
+                (maxProbabilityResult.getMiddle() != null && probabilityByZade.getLeft() > maxProbabilityResult.getMiddle())) {
             maxProbabilityResult = Triple.of(rule.getKey(), probabilityByZade.getLeft(), probabilityByZade.getRight());
         }
     }
